@@ -1,9 +1,16 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import HttpException from '../common/httpexception';
-import httpExcepiton from '../common/httpexception';
+import {User} from '../models';
+
 const router = Router();
 
-router.get('/', (req: Request, res: Response, next: NextFunction) => {
+router.get('/', async (req: Request, res: Response, next: NextFunction) => {
+  await User.create({
+    id: 'test1',
+    password: 'test1',
+    user_name: 'test1',
+    email: 'dongh@naver.com',
+    social: 'local',
+  })
   res.render('index');
 } );
  
