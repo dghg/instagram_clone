@@ -1,7 +1,7 @@
 import { ErrorRequestHandler, Request, Response, NextFunction } from 'express';
 import app from './index';
 import logger from './utils/logger';
-import { sequelize } from './models/index';
+import db from './models/index';
 
 require('dotenv').config();
 
@@ -11,7 +11,8 @@ const errorhandling = (err: Error,req : Request,res : Response,next : NextFuncti
   res.render('error');
 }
 //DB sync
-sequelize.sync();
+db.sync();
+
 
 app.use(errorhandling);
 
