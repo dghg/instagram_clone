@@ -1,0 +1,30 @@
+link#bootstrap-css(href='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet')
+script(src='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js')
+script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js')
+// ---- Include the above in your HEAD tag --------
+head
+  link#bootstrap-css(href='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet')
+  script(src='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js')
+  script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+  link(rel='stylesheet', href='../css/main.css')
+.container
+  h1.form-heading
+  .login-form
+    .main-div
+      .panel
+        img(src='../img/instagram.png' style='width: 70%')
+      form#Login(action='/auth/signup' method='POST')
+        .form-group
+          input#inputEmail.form-control(type='text' name='email' placeholder='휴대폰 번호 또는 이메일 주소')
+        .form-group
+          input.form-control(type='text' name='user_name' placeholder='성명')
+        .form-group
+          input.form-control(type='text' name='id' placeholder='사용자 이름')
+        .form-group
+          input#inputPassword.form-control(type='password' name='password' placeholder='비밀번호')
+        button.btn.btn-primary(type='submit') 가입
+      .agree
+        p= '가입하면 Instagram의 약관, 데이터 정책 및 쿠키 정책에 동의하게 됩니다.'
+  .login-form
+    .signup 계정이 있으신가요?
+      a(href='/') 로그인
