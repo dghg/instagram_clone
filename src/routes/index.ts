@@ -1,17 +1,20 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import {User} from '../models';
+
+import {User} from '../models/user';
+import {Post} from '../models/post';
 
 const router = Router();
 
 router.get('/', async (req: Request, res: Response, next: NextFunction) => {
-  await User.create({
-    id: 'test1',
-    password: 'test1',
-    user_name: 'test1',
-    email: 'dongh@naver.com',
-    social: 'local',
-  })
-  res.render('index');
-} );
+  try {
+    res.render('login');
+
+  } catch(err){
+    next(err);
+  }
+});
  
+router.get('/getpost', async (req: Request, res: Response, next: NextFunction) => {
+
+});
 export default router;
