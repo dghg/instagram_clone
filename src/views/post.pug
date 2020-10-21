@@ -1,0 +1,44 @@
+link#bootstrap-css(href='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet')
+script(src='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js')
+script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js')
+// ---- Include the above in your HEAD tag --------
+head
+  link#bootstrap-css(href='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet')
+  script(src='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js')
+  script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+  link(rel='stylesheet', href='../css/page.css')
+  script.
+    function imgupload(files) {
+      var data = new FormData();
+      data.append('img', files[0]);
+      var xhr = new XMLHttpRequest();
+      xhr.onload = function() {
+        if(xhr.status===200){
+            document.tempvalue = JSON.parse(xhr.responseText).url;
+            window.open('/p', "새 게시물", "width=300, height=300, resizable = no, scrollbars = no")
+        }
+      }
+      xhr.open('POST', '/p/img');
+      xhr.send(data);
+    }
+.container
+  section
+    nav(class='header')
+      .insta Instagram
+      form.search-form(action='/search' method='get')
+        input(type='text' placeholder='검색')
+        button(type='submit' style='width:0px; height:0px; display: none;')
+      .icon
+        .filebox
+          label(for='ex_file') +
+          input(type='file' id='ex_file' accept='image/*' onchange="imgupload(this.files);")
+        .home
+          span= '홈버튼'
+        .dm
+          span= '디엠버튼'
+        .explore
+        .profile
+
+    if post
+      img#post_img(src=post.img)
+      .post_content post.content

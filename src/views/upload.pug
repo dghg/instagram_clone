@@ -1,0 +1,32 @@
+link#bootstrap-css(href='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet')
+script(src='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js')
+script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js')
+// ---- Include the above in your HEAD tag --------
+head
+  link#bootstrap-css(href='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet')
+  script(src='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js')
+  script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+  link(rel='stylesheet', href='../css/page.css')
+
+script.
+  function post(){
+    var data = {
+      "content": document.getElementById('contents').value,
+      "img": opener.document.tempvalue,
+    };
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+      if(xhr.status===200){
+        window.close();
+      }
+    }
+    
+    xhr.open('POST', '/p');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+  }
+
+if opener.document.tempvalue
+  .title= '새 게시물'
+    input#contents(type='text' placeholder='문구 입력...')
+    a.postbutton(onclick="post()")= '공유하기'
