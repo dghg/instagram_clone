@@ -23,8 +23,10 @@ head
         p= '또는'
       .facebook-login
         a(href='/auth/facebook') Facebook으로 로그인
+      if loginError
+        .error-message= loginError
       .forgot
-        a(href='reset.html') 비밀번호를 잊으셨나요?
+        a(href='/') 비밀번호를 잊으셨나요?
   .login-form
     .signup 계정이 없으신가요?
       a(href='/auth/signup') 가입하기

@@ -3,9 +3,10 @@ script(src='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js')
 script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js')
 // ---- Include the above in your HEAD tag --------
 head
-  link#bootstrap-css(href='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet')
-  script(src='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js')
-  script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+  link#bootstrap-css(href='http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet')
+  script(src="https://kit.fontawesome.com/067b85bcc3.js" crossorigin="anonymous")
+  script(src='http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js')
+  script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
   link(rel='stylesheet', href='css/page.css')
   script.
     function imgupload(files) {
@@ -22,27 +23,28 @@ head
       xhr.send(data);
     }
 .container
-  section
-    nav(class='header')
-      .insta Instagram
+  .row.header
+    .col-sm
+      h1= "Instagram"
+    .col-sm
       form.search-form(action='/search' method='get')
         input(type='text' placeholder='검색')
         button(type='submit' style='width:0px; height:0px; display: none;')
-      .icon
-        .filebox
-          label(for='ex_file') +
-          input(type='file' id='ex_file' accept='image/*' onchange="imgupload(this.files);")
-        .home
-          span= '홈버튼'
-        .dm
-          span= '디엠버튼'
-        .explore
-          span= '탐색버튼'
-        .profile
-          span= '프로필버튼'
-    main
-      .stories
-      .post
-      .right
+    .col-sm.icon
+      .filebox
+        label(for='ex_file') +
+        input(type='file' id='ex_file' accept='image/*' onchange="imgupload(this.files);")
+      i.fa.fa-home
+      i.far.fa-sticky-note
+      i.fab.fa-wpexplorer
+      i.far.fa-user-circle
+  .row.main      
+    .stories
+    .posts
+      for post in posts
+        .p
+          img(src=post.img)
+          .content= post.content
+    .right
     footer
 
