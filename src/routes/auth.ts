@@ -25,7 +25,7 @@ router.post('/login', async (req: Request, res: Response, next: NextFunction) =>
         }
         if(!user){
             req.flash('loginError', info.message);
-            return res.redirect('/fail');
+            return res.redirect('/');
         }
 
         return req.login(user, (err) => {
@@ -33,7 +33,7 @@ router.post('/login', async (req: Request, res: Response, next: NextFunction) =>
               logger.error(err);
               return next(err);
           }
-          return res.redirect('/success');
+          return res.redirect('/');
         })
     })(req,res,next);
 

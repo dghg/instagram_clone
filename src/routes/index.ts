@@ -1,5 +1,4 @@
 import { Router, Request, Response, NextFunction } from 'express';
-
 import {User} from '../models/user';
 import {Post} from '../models/post';
 
@@ -7,8 +6,16 @@ const router = Router();
 
 router.get('/', async (req: Request, res: Response, next: NextFunction) => {
   try {
-    res.render('login');
+    if(!req.isAuthenticated()){
+      res.render('login');
+    }
+    else{
+      const posts = await Post.findAll({});
+      res.render('main', {
+        posts
+      });
 
+    }
   } catch(err){
     next(err);
   }
