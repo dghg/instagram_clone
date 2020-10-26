@@ -4,9 +4,10 @@ import * as bcrypt from 'bcrypt';
 import {User} from '../../models/user';
 import logger from '../logger';
 
-const message = { message : '아이디 또는 비밀번호 틀림'};
+const notExistId = { message : '입력한 사용자 이름을 사용하는 계정을 찾을 수 없습니다. 사용자 이름을 확인하고 다시 시도하세요.'};
+const PasswordFailure = { message : '잘못된 비밀번호입니다. 다시 확인하세요.'};
 
-const localStrategy = (passport: PassportStatic) => {
+const localStrategy = (passport: PassportStatic) => { // authenticate strategy 
   passport.use(new Strategy({usernameField: 'id'}, async (id, password, done) => {
     try {
       const existed = await User.findOne({where: {id}});
@@ -17,11 +18,11 @@ const localStrategy = (passport: PassportStatic) => {
           done(null, existed);
         }
         else{
-            done(null, false, message);
+            done(null, false, PasswordFailure);
         }
       }
       else {
-        done(null, false, message);
+        done(null, false, notExistId);
       }
     } catch(err){
         logger.error(err);
