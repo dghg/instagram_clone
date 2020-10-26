@@ -1,38 +1,76 @@
-import {BuildOptions, DataTypes, Model, Sequelize } from 'sequelize';
+import {
+    Sequelize,
+    Model,
+    ModelDefined,
+    DataTypes,
+    HasManyGetAssociationsMixin,
+    HasManyAddAssociationMixin,
+    HasManyHasAssociationMixin,
+    Association,
+    HasManyCountAssociationsMixin,
+    HasManyCreateAssociationMixin,
+    Optional,  
+  } from "sequelize";
+import { SequelizeAttributes} from '../typings/SequelizeAttributes';
+
+import {User} from './user';
+import {Post} from './post';
+
 
 export interface CommentAttributes {
-    id: number;
+    id?: number;
     content: string;
+    userId: string;
+    postId: number;
     createdAt?: Date;
     updatedAt?: Date;
-}
-
-export interface CommentModel extends Model<CommentAttributes>, CommentAttributes {}
-
-export class Comment extends Model<CommentModel, CommentAttributes> {}
-
-export type CommentStatic = typeof Model & {new (values?: object, options?: BuildOptions): CommentModel};
-
-export function CommentFactory (sequelize: Sequelize): CommentStatic {
-    return <CommentStatic>sequelize.define("Comments", {
-      id: {
-          type: DataTypes.INTEGER,
-          primaryKey: true,
-          autoIncrement: true,
-      },
-      content: {
-          type: DataTypes.STRING,
-          allowNull: false,
-      },
-      createdAt: {
-          type: DataTypes.DATE,
-          allowNull: false,
-          defaultValue: DataTypes.NOW,
-      },
-      updatedAt: {
-          type: DataTypes.DATE,
-          allowNull: false,
-          defaultValue: DataTypes.NOW,
-      },
-    });
 };
+
+export class Comment extends Model<CommentAttributes> implements CommentAttributes {
+    public id!: number;
+    public content: string;
+    public userId: string;
+    public postId: number;
+
+    public readonly createdAt!: Date;
+    public readonly updatedAt!: Date;
+    
+    static initialize(sequelize: Sequelize) {
+        this.init({
+            id: {
+                type: DataTypes.INTEGER,
+                autoIncrement: true,
+                primaryKey: true,
+            },
+            content: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            userId: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            postId: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            },
+            createdAt: {
+                type: DataTypes.DATE,
+                defaultValue: DataTypes.NOW,
+            },
+            updatedAt: {
+                type: DataTypes.DATE,
+                defaultValue: DataTypes.NOW,
+            }
+          }, {
+              sequelize,
+              tableName: 'comments',
+          });
+    };
+
+    static associate() {
+        this.belongsTo(User, {foreignKey: 'userId'});
+        this.belongsTo(Post, {foreignKey: 'postId'});
+    };
+
+}
