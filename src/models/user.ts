@@ -62,10 +62,12 @@ export class User extends Model<UserAttributes> implements UserAttributes {
     public countStories!: HasManyCountAssociationsMixin;
    
     public addFollowings!: BelongsToManyAddAssociationMixin<User, string>;
+    public getFollowings!: BelongsToManyGetAssociationsMixin<User>;
     public createFollowings!: BelongsToManyCreateAssociationMixin<User>;
     public countFollowings!: BelongsToManyCountAssociationsMixin;
 
     public addFollowers!: BelongsToManyAddAssociationMixin<User, string>;
+    public getFollowers!: BelongsToManyGetAssociationsMixin<User>;
     public createFollowers!: BelongsToManyCreateAssociationMixin<User>;
     public countFollowers!: BelongsToManyCountAssociationsMixin;
 
