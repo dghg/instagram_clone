@@ -23,6 +23,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	-webkit-appearance: none;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -69,6 +70,7 @@ table {
 	margin-top: 5px;
 	margin-bottom: 30px;
 	border: 1px solid #d4d4d4;
+	width: 70%;
 }
 
 .p > img {
@@ -77,16 +79,6 @@ table {
 .icon > * {
 	display: inline;
 }
-
-.filebox label {
-	color: #999;
-	font-size: 15px;
-	line-height: normal;
-	vertical-align: middle;
-	background-color: #fdfdfd;
-	border: 1px solid #ebebeb;
-	border-bottom-color: #e2e2e2;
-  }
   
   .filebox input[type="file"] {  /* 파일 필드 숨기기 */
 	position: absolute;
@@ -134,11 +126,22 @@ table {
 	  font-weight: bold;
   }
 
-  .comment > textarea {
-	  resize: none;
-	  outline: none;
-	  color: transparent;
-	  width: 100%;
-	  border: none;
+  a {
+	color: inherit;
+  }
 
+  textarea {
+	border: 1px solid #d4d4d4;
+	box-shadow: none;
+	outline: none;	
+	-webkit-appearance: none;
+
+
+  }
+
+  .comment button {
+	  color: #bfe3f1;
+	  appearance: none;
+	  background: none;
+	  border: none;
   }
