@@ -1,36 +1,9 @@
-link#bootstrap-css(href='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet')
-script(src='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js')
-script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js')
-// ---- Include the above in your HEAD tag --------
-head
-  link#bootstrap-css(href='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet')
-  script(src='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js')
-  script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
-  link(rel='stylesheet', href='../css/page.css')
-.container-fluid
-  section.row
-    .header
-      .col-xs-3
-        .insta Instagram
-        form.search-form(action='/search' method='get')
-          input(type='text' placeholder='검색')
-          button(type='submit' style='width:0px; height:0px; display: none;')
-        .icon
-          .filebox
-            label(for='ex_file') +
-            input(type='file' id='ex_file' accept='image/*' onchange="imgupload(this.files);")
-          .home
-            span= '홈버튼'
-          .dm
-            span= '디엠버튼'
-          .explore
-          .profile
-    header
-      section
-      .user
-      ul
-        li= `게시물 ${posts.length}`
-        li= `팔로잉 ${followings}`
-        li= `팔로워 ${followers}`
+extends header.pug
+block content
+  .user
+    ul
+      li= `게시물 ${posts.length}`
+      li= `팔로잉 ${followings}`
+      li= `팔로워 ${followers}`
       
 

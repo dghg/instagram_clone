@@ -1,14 +1,41 @@
-link#bootstrap-css(href='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet')
-script(src='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js')
-script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js')
-// ---- Include the above in your HEAD tag --------
-head
-  link#bootstrap-css(href='http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet')
-  script(src="https://kit.fontawesome.com/067b85bcc3.js" crossorigin="anonymous")
-  script(src='http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js')
-  script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
-  link(rel='stylesheet', href='css/page.css')
+extends header.pug
+    
+block content
+  .row.main      
+    .stories
+    .posts
+      for post in posts
+        .p
+          .userid
+            a(href=`/profile/${user.id}`)= user.id
+          img(src=post.img)
+          .icon
+            i(onclick=``).far.fa-heart
+            i.far.fa-comments
+          .likes= `좋아요 ${post.likes.length} 개`
+          .content
+            span(style='font-weight:bold;')= user.id
+            = "   "
+            span.content= post.content
+          .comment
+            form(action=`/p/${post.id}/comment` method='POST')
+              textarea(placeholder='댓글 달기...' style="height:18px;" name='comment' onchange='comment_onchange(this);')
+              button#commentpost(type='submit' disabled)= '게시'
+    .right
+    footer
+  
   script.
+    function comment_onchange(text){
+      var e = document.getElementById('commentpost');
+      if(text.value){
+        e.style.color= '#0095f6';
+        e.disabled = false;
+      }
+      else{
+        e.style.color = '#bfe3f1';
+        e.disabled = true;
+      }
+    }
     function imgupload(files) {
       var data = new FormData();
       data.append('img', files[0]);
@@ -21,47 +48,4 @@ head
       }
       xhr.open('POST', '/p/img');
       xhr.send(data);
-    }
-    function clickLike(){
-       
-    }
-
-.container
-  .row.header
-    .col-sm
-      img(src='img/instagram.png' style='width: 50%')
-    .col-sm
-      form.search-form(action='/search' method='get')
-        input(type='text' placeholder='검색')
-        button(type='submit' style='width:0px; height:0px; display: none;')
-    .col-sm.icon
-      .filebox
-        label(for='ex_file') +
-        input(type='file' id='ex_file' accept='image/*' onchange="imgupload(this.files);")
-      i.fa.fa-home
-      i.far.fa-sticky-note
-      i.fab.fa-wpexplorer
-      i.far.fa-user-circle
-  .row.main      
-    .stories
-    .posts
-      for post in posts
-        .p
-          .userid
-            a(href=`/profile/${user.id}`)= user.id
-          img(src=post.img)
-          .icon
-            i(onclick="clickLike();").far.fa-heart
-            i.far.fa-comments
-          .likes= `좋아요 ${post.likes} 개`
-          .content
-            span(style='font-weight:bold;')= user.id
-            = "   "
-            span.content= post.content
-          .comment
-            form(action=`/p/${post.id}/comment` method='POST')
-              textarea(placeholder='댓글 달기...' style="height:18px;" name='comment')
-              button(type='submit')= '게시'
-    .right
-    footer
-
+      }
