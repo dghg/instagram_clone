@@ -59,6 +59,21 @@ router.post('/', isLoggedIn, async (req: Request, res: Response, next: NextFunct
   }
 );
 
+router.post('/:id/comment', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
+  const {comment} = req.body;
+  const id = req.params.id;
+  try {
+    const newComment = await req.user.createComment({
+      content: comment,
+      postId: id,
+    });
+    res.status(200).json({});
+  } catch(err){
+    logger.error(err);
+    next(err);
+  }
+});
+
 router.post('/img', isLoggedIn, upload.single('img'), (req: Request, res: Response, next: NextFunction) => {
   res.json({url: req.file.filename});
 });

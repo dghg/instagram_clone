@@ -48,12 +48,14 @@ table {
 	border-spacing: 0;
 }
 
-div {
-	border: 1px solid #d4d4d4;
+.header {
+	margin-top : 10px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #d4d4d4;
 }
 
-.header {
-	margin-bottom: 10px;
+.search-form {
+	margin: 10px;
 }
 
 .stories {
@@ -65,7 +67,12 @@ div {
 }
 .p {
 	margin-top: 5px;
-	margin-bottom: 5px;
+	margin-bottom: 30px;
+	border: 1px solid #d4d4d4;
+}
+
+.p > img {
+	margin: 10px;
 }
 .icon > * {
 	display: inline;
@@ -100,7 +107,8 @@ div {
   }
 
   .icon > i {
-    margin: 6px;
+	margin: 15px;
+	font-size: 20px;
   }
 
   .post {
@@ -120,3 +128,17 @@ div {
 	width: 300px;
   }
   
+  .userid {
+	  margin-left: 30px;
+	  margin-top: 30px;
+	  font-weight: bold;
+  }
+
+  .comment > textarea {
+	  resize: none;
+	  outline: none;
+	  color: transparent;
+	  width: 100%;
+	  border: none;
+
+  }

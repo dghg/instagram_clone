@@ -1,6 +1,9 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import {User} from '../models/user';
 import {Post} from '../models/post';
+import {Like} from '../models/like';
+import {Comment} from '../models/comment';
+import {Op}  from 'sequelize';
 
 const router = Router();
 
@@ -10,8 +13,12 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
       res.render('login');
     }
     else{
-      const posts = await Post.findAll({});
+      const followings = (await req.user.getFollowings()).map(user=>user.id);
+      const posts = await Post.findAll({where : {
+        [Op.or]: [{userId: followings}, {userId: req.user.id}]
+      }, include: {all: true}});
       res.render('main', {
+        user: req.user,
         posts
       });
 
@@ -21,7 +28,5 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
   }
 });
  
-router.get('/getpost', async (req: Request, res: Response, next: NextFunction) => {
 
-});
 export default router;

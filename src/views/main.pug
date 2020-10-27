@@ -22,10 +22,14 @@ head
       xhr.open('POST', '/p/img');
       xhr.send(data);
     }
+    function clickLike(){
+       
+    }
+
 .container
   .row.header
     .col-sm
-      h1= "Instagram"
+      img(src='img/instagram.png' style='width: 50%')
     .col-sm
       form.search-form(action='/search' method='get')
         input(type='text' placeholder='검색')
@@ -43,8 +47,21 @@ head
     .posts
       for post in posts
         .p
+          .userid
+            a(href=`/profile/${user.id}`)= user.id
           img(src=post.img)
-          .content= post.content
+          .icon
+            i(onclick="clickLike();").far.fa-heart
+            i.far.fa-comments
+          .likes= `좋아요 ${post.likes} 개`
+          .content
+            span(style='font-weight:bold;')= user.id
+            = "   "
+            span.content= post.content
+          .comment
+            form(action=`/p/${post.id}/comment` method='POST')
+              textarea(placeholder='댓글 달기...' style="height:18px;" name='comment')
+              button(type='submit')= '게시'
     .right
     footer
 
