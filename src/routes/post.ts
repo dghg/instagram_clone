@@ -28,21 +28,6 @@ const upload = multer({
   limits: { fileSize: 5* 1024 * 1024},
 });
 
-router.get('/', isLoggedIn, (req: Request, res: Response, next: NextFunction) => {
-  res.render('upload');
-}); // upload \page 
-
-router.get('/:id', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const existed = await Post.findOne({where : {id: req.params.id}});
-    res.render('post', {
-      post: existed,
-    });
-  } catch(err){
-    logger.error(err);
-    next(err);
-  }
-});
 router.post('/', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
   console.log(req.body);
   const {content, img} = req.body;
@@ -59,6 +44,22 @@ router.post('/', isLoggedIn, async (req: Request, res: Response, next: NextFunct
   }
 );
 
+router.get('/', isLoggedIn, (req: Request, res: Response, next: NextFunction) => {
+  res.render('upload');
+}); // upload \page 
+
+router.get('/:id', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const existed = await Post.findOne({where : {id: req.params.id}});
+    res.render('post', {
+      post: existed,
+    });
+  } catch(err){
+    logger.error(err);
+    next(err);
+  }
+});
+
 router.post('/:id/comment', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
   const {comment} = req.body;
   const id = req.params.id;
@@ -67,7 +68,7 @@ router.post('/:id/comment', isLoggedIn, async (req: Request, res: Response, next
       content: comment,
       postId: id,
     });
-    res.status(200).json({});
+    res.status(200).redirect('/p/'+req.params.id);
   } catch(err){
     logger.error(err);
     next(err);
