@@ -13,6 +13,11 @@ const errorhandling = (err: Error,req : Request,res : Response,next : NextFuncti
 //DB sync
 db.sync();
 
+app.use((req: Request, res: Response, next: NextFunction) => {
+  var err = new Error('Not Found.');
+  res.status(404);
+  next(err);
+});
 app.use(errorhandling);
 
 const server = app.listen(process.env.PORT, () => {
