@@ -73,9 +73,6 @@ table {
 	width: 70%;
 }
 
-.p > img {
-	margin: 10px;
-}
 .icon > * {
 	display: inline;
 }
@@ -98,7 +95,8 @@ table {
 	  text-align: center;
   }
 
-  .icon > i {
+  .icon  i {
+	display: inline;
 	margin: 15px;
 	font-size: 20px;
   }
@@ -121,27 +119,79 @@ table {
   }
   
   .userid {
-	  margin-left: 30px;
-	  margin-top: 30px;
+	  padding-left: 10px;
+	  padding-top: 30px;
 	  font-weight: bold;
+	  border-bottom: 1px solid #d4d4d4;
   }
 
   a {
 	color: inherit;
   }
 
-  textarea {
-	border: 1px solid #d4d4d4;
-	box-shadow: none;
-	outline: none;	
-	-webkit-appearance: none;
-
-
+  .comment, .content, .likes {
+	  padding: 5px;
   }
-
   .comment button {
 	  color: #bfe3f1;
 	  appearance: none;
 	  background: none;
 	  border: none;
   }
+  
+  .comment form {
+	  border-top: 1px solid #d4d4d4;
+  }
+
+  .comment input {
+	  margin-top: 10px;
+	  border: none;
+	  width: 90%;
+  }
+
+  .postpage {
+	  border: 1px solid #d4d4d4;
+  }
+
+  .post_content {
+	  padding-top: 20px;
+  }
+
+/* The Modal (background) */
+.modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%; /* Could be more or less, depending on screen size */                          
+        }
+        /* The Close Button */
+        .close, .delete {
+            color: #aaa;
+            float: right;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .close:hover,
+		.close:focus,
+		.delete:hover,
+        .delete:focus
+		{
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }

@@ -4,8 +4,8 @@ function getComments(id){
 
 document.querySelectorAll('.comment-form').forEach(function(e) {
   var id = e.children[0].innerHTML;
-
-  e.addEventListener('submit', function(el) {
+  
+  e.addEventListener('submit', function(el) { // comment submit function
     el.preventDefault(); 
     var comment = el.target.comment.value;
     var xhr = new XMLHttpRequest();
@@ -40,3 +40,5 @@ function comment_onchange(text){
       e.disabled = true;
     }
   }
+
+

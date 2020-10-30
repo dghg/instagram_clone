@@ -1,6 +1,6 @@
 extends header.pug
 
-block content  
+block content
   if post
     .row.postpage
       .col-sm
@@ -16,9 +16,18 @@ block content
         .comments.post_content
           for comment in post.comments
             .comment
+              div(style='display:none;')= `${comment.id}`
               span(style="font-weight: bold;")= comment.userId
               span= "  "
               span= comment.content
+              if user.id===comment.userId
+                button.commentBtn.fas.fa-ellipsis-h
+        .modal#myModal
+          .modal-content
+            span.delete= '삭제'
+              div(style="display:none;")
+            span.close= '닫기'
+            
         .icon
           i.far.fa-heart(onclick=``)
           a(href=`/p/${post.id}`)
@@ -28,3 +37,5 @@ block content
             div(style='display:none;')= `${post.id}`
             input(type='text' placeholder='댓글 달기...' name='comment' onchange='comment_onchange(this);')
             button#commentpost(type='submit' disabled)= '게시'
+  script(src=`http://localhost:3000/js/main.js`)
+  script(src=`http://localhost:3000/js/post.js`)

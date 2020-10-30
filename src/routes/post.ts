@@ -31,7 +31,6 @@ const upload = multer({
 });
 
 router.post('/', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
-  console.log(req.body);
   const {content, img} = req.body;
   try {
     const newPost = await req.user.createPost({
@@ -53,10 +52,12 @@ router.get('/', isLoggedIn, (req: Request, res: Response, next: NextFunction) =>
 router.get('/:id', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
   try {
     const existed = await Post.findOne({where : {id: req.params.id}, include: {model: Comment, as: 'comments'}});
-    console.log(JSON.parse(JSON.stringify(existed)));
-    res.render('post', {
-      post: JSON.parse(JSON.stringify(existed)),
-    });
+    if(existed){
+      res.render('post', {
+        post: JSON.parse(JSON.stringify(existed)),
+      });
+    }
+
   } catch(err){
     logger.error(err);
     next(err);
@@ -75,7 +76,7 @@ router.post('/comment', isLoggedIn, async (req: Request, res: Response, next: Ne
       res.status(201).json(newComment);
     }
     else{
-      res.status(403).redirect('/');
+      res.status(403).json({});
     }
   } catch(err){
     logger.error(err);
@@ -86,7 +87,6 @@ router.post('/comment', isLoggedIn, async (req: Request, res: Response, next: Ne
 router.post('/:id/like', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
   const id = parseInt(req.params.id);
   try {
-    console.log(Object.keys(req.user));
 
     req.user.addLikes(id)
     .then(()=>(
@@ -106,6 +106,25 @@ router.delete('/:id/like',  isLoggedIn, async (req: Request, res: Response, next
   const id = req.params.id;
   try {
   } catch(err){
+    logger.error(err);
+    next(err);
+  }
+});
+
+router.delete('/comment', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const {id} = req.body;
+    const deleted = await Comment.findOne({where: {id}}); 
+    if(deleted){
+      deleted.destroy()
+      .then(()=>{
+        res.status(200).json({});
+      });
+    } 
+    else {
+      res.status(403).json({});
+    }
+  } catch(err) {
     logger.error(err);
     next(err);
   }
