@@ -8,6 +8,21 @@ head
   script(src='http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js')
   script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
   link(rel='stylesheet', href='http://localhost:3000/css/page.css')
+  script.
+    function imgupload(files) {
+      var data = new FormData();
+      data.append('img', files[0]);
+      var xhr = new XMLHttpRequest();
+      xhr.onload = function() {
+        if(xhr.status===200){
+            document.tempvalue = JSON.parse(xhr.responseText).url;
+            window.open('/p', "새 게시물", "width=300, height=300, resizable = no, scrollbars = no")
+        }
+      }
+      xhr.open('POST', '/p/img');
+      xhr.send(data);
+      }
+
 .container
   .row.header
     .col-sm

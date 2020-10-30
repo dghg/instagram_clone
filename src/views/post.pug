@@ -2,5 +2,17 @@ extends header.pug
 
 block content  
   if post
-    img#post_img(src=post.img)
+    .left
+      img#post_img(src=`http://localhost:3000/${post.img}`)
+    .right
+      .userid
+        a(href=`/profile/${post.userId}`)= post.userId
+      .content
+        span.content= post.content
+        = " "
+      .comments
+        for comment in post.comments
+          span(style='font-weight: bold;')= comment.userId
+          span= "   "
+          span= comment.content
     .post_content= post.content

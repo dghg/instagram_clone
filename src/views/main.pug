@@ -3,28 +3,58 @@ extends header.pug
 block content
   .row.main      
     .stories
-    .posts
-      for post in posts
-        .p
+    .ps
+      each post in posts
+        .p(id=`${post.id}`)
           .userid
             a(href=`/profile/${user.id}`)= user.id
           img(src=post.img)
           .icon
-            i(onclick=``).far.fa-heart
+            i.far.fa-heart(onclick=onclick=`clickLike(${JSON.stringify(post)})`)
             i.far.fa-comments
-          .likes= `좋아요 ${post.likes.length} 개`
+          .likes
+            span= "좋아요 "
+            span.likecount= post.likes ? post.likes.length : 0
+            span= "개"
           .content
             span(style='font-weight:bold;')= user.id
             = "   "
             span.content= post.content
           .comment
             form(action=`/p/${post.id}/comment` method='POST')
-              textarea(placeholder='댓글 달기...' style="height:18px;" name='comment' onchange='comment_onchange(this);')
+              input(type='text' placeholder='댓글 달기...' name='comment' onchange='comment_onchange(this);')
               button#commentpost(type='submit' disabled)= '게시'
     .right
     footer
   
   script.
+    function clickLike(post){
+      console.log("clickLIke");
+      console.log(post);
+      var xhr = new XMLHttpRequest();
+      var method;
+      var existed;
+      if(post.likes){
+        existed = post.likes.find((like)=>{
+          if(like.id===user.id){
+            return true;
+          }
+        });
+      }
+      xhr.onload = function() {
+        if(xhr.status!==200){
+          alert('Failed to like this post.');
+        }
+      }
+      if(existed){
+        method = 'DELETE';
+      } 
+      else{
+        method = 'POST';
+      }
+      xhr.open(method, `/p/${post.id}/like`);
+      xhr.send({});
+    }
     function comment_onchange(text){
       var e = document.getElementById('commentpost');
       if(text.value){
@@ -36,16 +66,3 @@ block content
         e.disabled = true;
       }
     }
-    function imgupload(files) {
-      var data = new FormData();
-      data.append('img', files[0]);
-      var xhr = new XMLHttpRequest();
-      xhr.onload = function() {
-        if(xhr.status===200){
-            document.tempvalue = JSON.parse(xhr.responseText).url;
-            window.open('/p', "새 게시물", "width=300, height=300, resizable = no, scrollbars = no")
-        }
-      }
-      xhr.open('POST', '/p/img');
-      xhr.send(data);
-      }
