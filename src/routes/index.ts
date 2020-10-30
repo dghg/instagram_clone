@@ -1,7 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import {User} from '../models/user';
 import {Post} from '../models/post';
-import {Like} from '../models/like';
 import {Comment} from '../models/comment';
 import {Op}  from 'sequelize';
 
@@ -16,13 +15,14 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
       const followings = (await req.user.getFollowings()).map(user=>user.id);
       const posts = await Post.findAll({where : {
         [Op.or]: [{userId: followings}, {userId: req.user.id}]
-      }, include: {all: true}});
-      res.render('main', {
-        user: req.user,
-        posts
+      }, include: {all: true}, limit: 10});
+        res.render('main', {
+        user: JSON.parse(JSON.stringify(req.user)),
+        posts: JSON.parse(JSON.stringify(posts)),
       });
-
+      
     }
+    
   } catch(err){
     next(err);
   }
