@@ -12,6 +12,7 @@ export const isNotLoggedIn= (req: Request, res: Response, next: NextFunction) =>
 
 export const isLoggedIn = (req: Request, res: Response, next: NextFunction) => {
     if(req.isAuthenticated()){
+      res.locals.user = req.user; // add user if authenticated
       next();
     }
     else{
