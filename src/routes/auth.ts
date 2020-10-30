@@ -4,7 +4,7 @@ import * as bcrypt from 'bcrypt';
 import logger from '../utils/logger';
 
 import {User} from '../models/user';
-
+import {isLoggedIn} from '../middleware';
 const router = Router();
 
 router.get('/signup', async (req: Request, res: Response, next: NextFunction) => {
@@ -69,9 +69,10 @@ router.post('/signup', async (req: Request, res: Response, next: NextFunction) =
   
 });
 
-router.get('/logout', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/logout', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
     try {
-
+      req.logout();
+      res.redirect('/');
     } catch(err) {
         logger.error(err);
         next(err);
