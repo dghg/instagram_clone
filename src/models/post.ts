@@ -12,11 +12,15 @@ import {
     HasManyCountAssociationsMixin,
     HasManyCreateAssociationMixin,
     Optional,
+    BelongsToManyGetAssociationsMixin,
+    BelongsToManyCreateAssociationMixin,
+    BelongsToManyCountAssociationsMixin,
+    BelongsToManyAddAssociationMixin,  
   } from "sequelize";
 
 import {User} from './user';
 import {Comment} from './comment';
-import {Like} from './like';
+import { LikeAttributes, Like } from "./like";
 
 export interface PostAttributes {
     id?: number;
@@ -27,7 +31,7 @@ export interface PostAttributes {
     updatedAt?: Date;
 };
 
-export class Post extends Model<PostAttributes> implements PostAttributes {
+export class Post extends Model implements PostAttributes {
     public id!: number;
     public content: string;
     public img: string;
@@ -39,16 +43,18 @@ export class Post extends Model<PostAttributes> implements PostAttributes {
     public getComments!: HasManyGetAssociationsMixin<Comment>;
     public createComment!: HasManyCreateAssociationMixin<Comment>;
     public countComments!: HasManyCountAssociationsMixin;
-    
-    public getLikes!: HasManyGetAssociationsMixin<Like>;
-    public createLike!: HasManyCreateAssociationMixin<Like>;
-    public countLikes!: HasManyCountAssociationsMixin;
-    
+        
+    public getLikes!: BelongsToManyGetAssociationsMixin<User>;
+    public addLikes!: BelongsToManyAddAssociationMixin<User, string>;
+    public createLikes!: BelongsToManyCreateAssociationMixin<User>;
+    public countLikes!: BelongsToManyCountAssociationsMixin;
+
     public readonly comments?: Comment[];
     public readonly likes?: Like[];
+
     public static associations: {
         comments: Association<Post, Comment>;
-        likes: Association<Post, Like>;
+        likes: Association<Post, User>;
     };
 
     static initialize(sequelize : Sequelize) {
@@ -87,8 +93,8 @@ export class Post extends Model<PostAttributes> implements PostAttributes {
 
    static associate() {
     this.belongsTo(User, {foreignKey: 'userId'});
+    this.belongsToMany(User, {through: 'likes'});
     this.hasMany(Comment, {as: 'comments', foreignKey: 'postId'});
-    this.hasMany(Like, {as: 'likes', foreignKey: 'postId'});
   }   
 };
 

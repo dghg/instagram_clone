@@ -26,7 +26,7 @@ export interface CommentAttributes {
     updatedAt?: Date;
 };
 
-export class Comment extends Model<CommentAttributes> implements CommentAttributes {
+export class Comment extends Model implements CommentAttributes {
     public id!: number;
     public content: string;
     public userId: string;

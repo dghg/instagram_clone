@@ -21,8 +21,8 @@ import { SequelizeAttributes } from "../typings/SequelizeAttributes";
 
 import {Post} from './post';
 import {Comment} from './comment';
-import {Like} from './like';
 import {Story} from './story';
+import { Like } from "./like";
 
 
 export interface UserAttributes { // declare interface for stricter typecheck 
@@ -35,7 +35,7 @@ export interface UserAttributes { // declare interface for stricter typecheck
     updatedAt?: Date;
 };
 
-export class User extends Model<UserAttributes> implements UserAttributes {
+export class User extends Model implements UserAttributes {
     public id: string;
     public password: string;
     public user_name: string;
@@ -53,14 +53,15 @@ export class User extends Model<UserAttributes> implements UserAttributes {
     public createComment!: HasManyCreateAssociationMixin<Comment>;
     public countComments!: HasManyCountAssociationsMixin;
     
-    public getLikes!: HasManyGetAssociationsMixin<Like>;
-    public createLike!: HasManyCreateAssociationMixin<Like>;
-    public countLikes!: HasManyCountAssociationsMixin;
-
     public getStories!: HasManyGetAssociationsMixin<Story>;
     public createStory!: HasManyCreateAssociationMixin<Story>;
     public countStories!: HasManyCountAssociationsMixin;
    
+    public getLikes!: BelongsToManyGetAssociationsMixin<Post>;
+    public addLikes!: BelongsToManyAddAssociationMixin<Post, number>;
+    public createLikes!: BelongsToManyCreateAssociationMixin<Post>;
+    public countLikes!: BelongsToManyCountAssociationsMixin;
+
     public addFollowings!: BelongsToManyAddAssociationMixin<User, string>;
     public getFollowings!: BelongsToManyGetAssociationsMixin<User>;
     public createFollowings!: BelongsToManyCreateAssociationMixin<User>;
@@ -73,19 +74,18 @@ export class User extends Model<UserAttributes> implements UserAttributes {
 
     public readonly posts?: Post[];
     public readonly comments?: Comment[];
-    public readonly likes?: Like[];
     public readonly stories?: Story[];
     public readonly followings?: User[];
     public readonly followers?: User[];
-
+    public readonly likes?: Like[];
+    
     public static associations: {
         posts: Association<User, Post>;
         comments: Association<User, Comment>;
-        likes: Association<User, Like>;
         stories: Association<User, Story>;
         followings: Association<User, User>;
         followers: Association<User, User>;
-
+        likes: Association<User, Post>;
     };
 
     static initialize(sequelize: Sequelize) {
@@ -129,8 +129,8 @@ export class User extends Model<UserAttributes> implements UserAttributes {
     static associate() {
         this.hasMany(Post, {as: 'posts', foreignKey: 'userId'});
         this.hasMany(Comment, {as: 'comments', foreignKey: 'userId'});
-        this.hasMany(Like, {as: 'likes', foreignKey: 'userId'});
         this.hasMany(Story, {as: 'stories', foreignKey: 'userId'});
+        this.belongsToMany(Post, {through: 'likes'});
         this.belongsToMany(this, {through: 'follow', as: 'followers', foreignKey: 'followingId'});
         this.belongsToMany(this, {through: 'follow', as: 'followings', foreignKey: 'followedId'});
 

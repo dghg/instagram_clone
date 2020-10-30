@@ -1,3 +1,4 @@
+
 import {
     Sequelize,
     Model,
@@ -10,60 +11,55 @@ import {
     HasManyCountAssociationsMixin,
     HasManyCreateAssociationMixin,
     Optional,
+    BelongsToManyGetAssociationsMixin,
+    BelongsToManyCreateAssociationMixin,
+    BelongsToManyCountAssociationsMixin,
+    BelongsToManyAddAssociationMixin,  
   } from "sequelize";
 
   import {User} from './user';
   import {Post} from './post';
 
   export interface LikeAttributes {
-      id?: number;
-      postId: number;
-      userId: string;
+      UserId: string;
+      PostId: number;
       createdAt?: Date;
       updatedAt?: Date;
-  };
+  }
 
   export class Like extends Model<LikeAttributes> implements LikeAttributes {
-      public id!: number;
-      public postId: number;
-      public userId: string;
-
+      public UserId: string;
+      public PostId: number;
+      
       public readonly createdAt!: Date;
       public readonly updatedAt!: Date;
 
-      static initialize(sequelize : Sequelize) {
-        this.init({
-         id: {
-           type: DataTypes.INTEGER,
-           autoIncrement: true,
-           primaryKey: true,
-         },
-         postId: {
-             type: DataTypes.INTEGER,
-             allowNull: false,
-         },
-         userId: {
-             type: DataTypes.STRING,
-             allowNull: false,
-         },
-         createdAt: {
-             type: DataTypes.DATE,
-             defaultValue: DataTypes.NOW,
-         },
-         updatedAt: {
-             type: DataTypes.DATE,
-             defaultValue: DataTypes.NOW,
-         },
-       }, {
-           sequelize,
-           tableName: 'likes',
-       });
- 
-    };
-       
-      static associate(){
-          this.belongsTo(Post, {foreignKey: 'postId'});
-          this.belongsTo(User, {foreignKey: 'userId'});
+      static initialize(sequelize: Sequelize){
+          this.init({
+              UserId: {
+                  type: DataTypes.STRING,
+                  primaryKey: true,
+              },
+              PostId: {
+                  type: DataTypes.INTEGER,
+                  primaryKey: true,
+              },
+              createdAt: {
+                type: DataTypes.DATE,
+                defaultValue: DataTypes.NOW,
+            },
+            updatedAt: {
+                type: DataTypes.DATE,
+                defaultValue: DataTypes.NOW,
+            },
+        },{
+                sequelize,
+                tableName: 'likes',
+            });
       }
-    }
 
+      static associate() {
+          this.belongsTo(Post, {foreignKey: 'PostId', as: 'Post'});
+          this.belongsTo(Post, {foreignKey: 'UserId', as: 'User'});
+      }
+  }
