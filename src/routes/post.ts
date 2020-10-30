@@ -6,6 +6,8 @@ import {isLoggedIn}from '../middleware';
 import {User} from '../models/user';
 import logger from '../utils/logger';
 import { Post } from '../models/post';
+import { Like } from '../models/like';
+import {Comment} from '../models/comment';
 
 const router = Router();
 
@@ -36,7 +38,7 @@ router.post('/', isLoggedIn, async (req: Request, res: Response, next: NextFunct
       content,
       img,
     })
-    res.status(200).json({});
+    res.status(200).redirect('/');
   } catch(err){
     logger.error(err);
     next(err);
@@ -50,9 +52,10 @@ router.get('/', isLoggedIn, (req: Request, res: Response, next: NextFunction) =>
 
 router.get('/:id', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const existed = await Post.findOne({where : {id: req.params.id}});
+    const existed = await Post.findOne({where : {id: req.params.id}, include: {model: Comment, as: 'comments'}});
+    console.log(JSON.parse(JSON.stringify(existed)));
     res.render('post', {
-      post: existed,
+      post: JSON.parse(JSON.stringify(existed)),
     });
   } catch(err){
     logger.error(err);
@@ -60,15 +63,48 @@ router.get('/:id', isLoggedIn, async (req: Request, res: Response, next: NextFun
   }
 });
 
-router.post('/:id/comment', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
-  const {comment} = req.body;
-  const id = req.params.id;
+router.post('/comment', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
+  const {id, comment} = req.body;
+  console.log(id,comment);
   try {
     const newComment = await req.user.createComment({
       content: comment,
       postId: id,
     });
-    res.status(200).redirect('/p/'+req.params.id);
+    if(newComment){
+      res.status(201).json(newComment);
+    }
+    else{
+      res.status(403).redirect('/');
+    }
+  } catch(err){
+    logger.error(err);
+    next(err);
+  }
+});
+
+router.post('/:id/like', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
+  const id = parseInt(req.params.id);
+  try {
+    console.log(Object.keys(req.user));
+
+    req.user.addLikes(id)
+    .then(()=>(
+      res.status(200).redirect('/p/'+id)
+    ));
+    
+
+
+  } catch(err){
+    console.log(err);
+    // logger.error(err);
+    next(err);
+  }
+});
+
+router.delete('/:id/like',  isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
+  const id = req.params.id;
+  try {
   } catch(err){
     logger.error(err);
     next(err);

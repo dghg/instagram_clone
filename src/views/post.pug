@@ -2,17 +2,29 @@ extends header.pug
 
 block content  
   if post
-    .left
-      img#post_img(src=`http://localhost:3000/${post.img}`)
-    .right
-      .userid
-        a(href=`/profile/${post.userId}`)= post.userId
-      .content
-        span.content= post.content
-        = " "
-      .comments
-        for comment in post.comments
-          span(style='font-weight: bold;')= comment.userId
-          span= "   "
-          span= comment.content
-    .post_content= post.content
+    .row.postpage
+      .col-sm
+        img#post_img(src=`http://localhost:3000/${post.img}`)
+      .col-sm
+        .userid
+          a(href=`/profile/${post.userId}`)= post.userId
+          span= "    " 
+          a(href=``)= '팔로우'
+        .post_content
+          span.userid(style="border:none;")= post.userId
+          span.content= post.content
+        .comments.post_content
+          for comment in post.comments
+            .comment
+              span(style="font-weight: bold;")= comment.userId
+              span= "  "
+              span= comment.content
+        .icon
+          i.far.fa-heart(onclick=``)
+          a(href=`/p/${post.id}`)
+            i.far.fa-comments
+        .comment
+          form.comment-form
+            div(style='display:none;')= `${post.id}`
+            input(type='text' placeholder='댓글 달기...' name='comment' onchange='comment_onchange(this);')
+            button#commentpost(type='submit' disabled)= '게시'
