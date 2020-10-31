@@ -3,8 +3,10 @@ extends header.pug
 block content
   .row.main      
     .stories
-      .circle= '+'
-
+      .circle
+        .label(for='ex_file')
+          i.fas.fa-plus
+        input(type='file' id='ex_file' accept='image/*' onchange="imgupload(this.files, true);")
       each story in stories
         .circle
           a(href=``)
@@ -35,3 +37,4 @@ block content
     .right          
     footer
     script(src=`http://localhost:3000/js/main.js`)
+    script(src=`http://localhost:3000/js/upload.js`)

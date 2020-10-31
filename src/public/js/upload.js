@@ -7,12 +7,20 @@ function imgupload(files, isStory=false) {
           if(isStory){ // story 인 경우
             var storyxhr = new XMLHttpRequest();
             storyxhr.onload = function() {
-                location.href = 'http://localhost:3000/story' + JSON.parse(storyxhr.responseText).id;
+                if(storyxhr.status===200){
+                    location.href = 'http://localhost:3000/story' + JSON.parse(storyxhr.responseText).id;
+                }
+                else {
+                    alert('failed to upload story');
+                }
+            }
+            var _ = {
+                "img": JSON.parse(xhr.responseText).url,
             }
             storyxhr.open('POST', '/story');
-            storyxhr.send(data);
-            
-          }
+            storyxhr.setRequestHeader('Content-Type', 'application/json');
+            storyxhr.send(JSON.stringify(_));
+            }
           else {
               var modal = document.getElementById('myModal');
               modal.style.display= "block";

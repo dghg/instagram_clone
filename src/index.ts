@@ -11,6 +11,7 @@ import indexRouter from './routes/index';
 import authRouter from './routes/auth';
 import postRouter from './routes/post';
 import profileRouter from './routes/profile';
+import storyRouter from './routes/story';
 import { profile } from 'console';
 
 class App {
@@ -64,6 +65,7 @@ class App {
       this.app.use('/auth', authRouter);
       this.app.use('/p', postRouter);
       this.app.use('/profile', profileRouter);
+      this.app.use('/story', storyRouter);
     }
 
 

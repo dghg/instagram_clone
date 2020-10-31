@@ -37,7 +37,7 @@ router.post('/', isLoggedIn, async (req: Request, res: Response, next: NextFunct
       content,
       img,
     })
-    res.status(200).redirect('/');
+    res.status(200).json(newPost);
   } catch(err){
     logger.error(err);
     next(err);
