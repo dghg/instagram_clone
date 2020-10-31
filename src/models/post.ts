@@ -20,7 +20,7 @@ import {
 
 import {User} from './user';
 import {Comment} from './comment';
-import { LikeAttributes, Like } from "./like";
+import { Like } from "./like";
 
 export interface PostAttributes {
     id?: number;
@@ -44,9 +44,9 @@ export class Post extends Model implements PostAttributes {
     public createComment!: HasManyCreateAssociationMixin<Comment>;
     public countComments!: HasManyCountAssociationsMixin;
         
-    public getLikes!: BelongsToManyGetAssociationsMixin<User>;
-    public addLikes!: BelongsToManyAddAssociationMixin<User, string>;
-    public createLikes!: BelongsToManyCreateAssociationMixin<User>;
+    public getLikes!: BelongsToManyGetAssociationsMixin<Like>;
+    public addLikes!: BelongsToManyAddAssociationMixin<Like, string>;
+    public createLikes!: BelongsToManyCreateAssociationMixin<Like>;
     public countLikes!: BelongsToManyCountAssociationsMixin;
 
     public readonly comments?: Comment[];
@@ -54,7 +54,7 @@ export class Post extends Model implements PostAttributes {
 
     public static associations: {
         comments: Association<Post, Comment>;
-        likes: Association<Post, User>;
+        likes: Association<Post, Like>;
     };
 
     static initialize(sequelize : Sequelize) {
@@ -93,7 +93,7 @@ export class Post extends Model implements PostAttributes {
 
    static associate() {
     this.belongsTo(User, {foreignKey: 'userId'});
-    this.belongsToMany(User, {through: 'likes'});
+    this.belongsToMany(User, {through: Like});
     this.hasMany(Comment, {as: 'comments', foreignKey: 'postId'});
   }   
 };

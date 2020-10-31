@@ -69,6 +69,11 @@ table {
 	padding: 5px;
 }
 
+.stories > ul{
+	display: inline;
+}
+
+
 .posts {
 	border: none;
 }
@@ -171,6 +176,25 @@ table {
 
   .post_content {
 	  padding-top: 20px;
+  }
+
+  .user_info li{
+	display: inline;
+    padding-right: 20px;
+  }
+  .userid span {
+	  display: inline;
+	  width: 86px;
+  }
+
+  .userid  button {
+	  font-size: 14px;
+	  border-radius: 3px;
+	  border: none;
+	  background: #0095f6;
+	  color: white;
+	  line-height: 26px;
+	  width: 86px;
   }
 
 /* The Modal (background) */

@@ -1,10 +1,10 @@
 import {Router, Request, Response, NextFunction } from 'express';
 import logger from '../utils/logger';
 import {User} from '../models/user';
-
+import {isLoggedIn} from '../middleware';
 const router = Router();
 
-router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/:id', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
     try {
       const user = await User.findOne({where : {id: req.params.id}});
       if(user){
@@ -15,6 +15,7 @@ router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
               posts,
               followings,
               followers,
+              profile: user,
           })
       };
     } catch(err){

@@ -27,12 +27,19 @@ import {
       updatedAt?: Date;
   }
 
-  export class Like extends Model<LikeAttributes> implements LikeAttributes {
+  export class Like extends Model implements LikeAttributes {
       public UserId: string;
       public PostId: number;
       
       public readonly createdAt!: Date;
       public readonly updatedAt!: Date;
+
+      public readonly users: User[];
+      public readonly posts: Post[];
+      public static associations: {
+          users: Association<Like, User>;
+          posts: Association<Like, Post>;
+      }
 
       static initialize(sequelize: Sequelize){
           this.init({
@@ -57,9 +64,8 @@ import {
                 tableName: 'likes',
             });
       }
-
       static associate() {
-          this.belongsTo(Post, {foreignKey: 'PostId', as: 'Post'});
-          this.belongsTo(Post, {foreignKey: 'UserId', as: 'User'});
+          this.belongsTo(Post);
+          this.belongsTo(User);
       }
   }

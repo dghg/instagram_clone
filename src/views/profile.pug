@@ -1,9 +1,23 @@
 extends header.pug
 block content
   .user
-    ul
-      li= `게시물 ${posts.length}`
-      li= `팔로잉 ${followings}`
-      li= `팔로워 ${followers}`
-      
-
+    .userid(style="border: none; font-size: 25px;")
+      span
+        h2#profile_id= profile.id
+      span
+        if profile.id !== user.id
+          button.followbutton
+    ul.user_info
+      li
+        span= '게시물 '
+        span(style='font-weight:bold;')= posts.length
+      li
+        span= '팔로워 '
+        span(style='font-weight:bold;')= followers
+      li
+        span= '팔로잉 '
+        span(style='font-weight:bold;')= followings
+     
+  .menu
+  .posts
+  script(src='http://localhost:3000/js/follow.js')

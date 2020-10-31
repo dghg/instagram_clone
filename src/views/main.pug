@@ -3,19 +3,21 @@ extends header.pug
 block content
   .row.main      
     .stories
-      .circle
-        .label(for='ex_file')
+      .filebox.circle
+        label(for='story_file')
           i.fas.fa-plus
-        input(type='file' id='ex_file' accept='image/*' onchange="imgupload(this.files, true);")
-      each story in stories
-        .circle
-          a(href=``)
-        .userid= user.id
+        input.storyupload(type='file' id='story_file' accept='image/*')
+      ul(style='')
+        each story in stories
+          li(style='')
+            .circle(style="padding-bottom:3px;")
+              a(href=`/story/${story.id}`)
+            div(style="font-weight:bold;font-size:14px;padding:0;")= story.userId
     .ps
       each post in posts
         .p
           .userid
-            a(href=`/profile/${user.id}`)= user.id
+            a(href=`/profile/${post.userId}`)= post.userId
           img(src=post.img)
           .icon
             i.far.fa-heart(onclick=`clickLike(${JSON.stringify(post)})`)
@@ -26,7 +28,7 @@ block content
             span.likecount= post.likes ? post.likes.length : 0
             span= "개"
           .content
-            span(style='font-weight:bold;')= user.id
+            span(style='font-weight:bold;')= post.userId
             = "   "
             span.content= post.content
           .comment

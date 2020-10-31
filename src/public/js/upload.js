@@ -8,7 +8,7 @@ function imgupload(files, isStory=false) {
             var storyxhr = new XMLHttpRequest();
             storyxhr.onload = function() {
                 if(storyxhr.status===200){
-                    location.href = 'http://localhost:3000/story' + JSON.parse(storyxhr.responseText).id;
+                    location.href = 'http://localhost:3000/story/' + JSON.parse(storyxhr.responseText).id;
                 }
                 else {
                     alert('failed to upload story');
@@ -59,5 +59,17 @@ window.onload = function() {
             modal.style.display = 'none';
         }
     }
+
+    document.querySelectorAll('.postupload').forEach((e) => {
+     e.onchange = function(event) {
+         imgupload(event.target.files);
+     }
+    });
+
+    document.querySelectorAll('.storyupload').forEach((e)=>{
+    e.onchange = function(event) {
+        imgupload(event.target.files, true);
+    }
+    })
     
 }
