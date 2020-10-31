@@ -12,7 +12,7 @@ import authRouter from './routes/auth';
 import postRouter from './routes/post';
 import profileRouter from './routes/profile';
 import storyRouter from './routes/story';
-import { profile } from 'console';
+import followRouter from './routes/follow';
 
 class App {
     app: express.Application;
@@ -66,6 +66,7 @@ class App {
       this.app.use('/p', postRouter);
       this.app.use('/profile', profileRouter);
       this.app.use('/story', storyRouter);
+      this.app.use('/follow', followRouter);
     }
 
 
