@@ -19,6 +19,7 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
         res.render('main', {
         user: JSON.parse(JSON.stringify(req.user)),
         posts: JSON.parse(JSON.stringify(posts)),
+        stories: {},
       });
       
     }
