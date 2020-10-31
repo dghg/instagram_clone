@@ -3,6 +3,12 @@ extends header.pug
 block content
   .row.main      
     .stories
+      .circle= '+'
+
+      each story in stories
+        .circle
+          a(href=``)
+        .userid= user.id
     .ps
       each post in posts
         .p
@@ -26,6 +32,6 @@ block content
               div(style='display:none;')= `${post.id}`
               input(type='text' placeholder='댓글 달기...' name='comment' onchange='comment_onchange(this);')
               button#commentpost(type='submit' disabled)= '게시'
-    .right
+    .right          
     footer
     script(src=`http://localhost:3000/js/main.js`)
