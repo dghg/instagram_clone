@@ -130,9 +130,7 @@ table {
   }
 
   .postbutton {
-	  width: 15px;
-	  height: 15px;
-	  color: #00F2FF;
+	  padding-top: 10px;
   }
 
   img {

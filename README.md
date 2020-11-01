@@ -38,11 +38,11 @@
   - GET /auth/signup : sign up page rendering O
   - GET /auth/facebook/(callback) : facebook authentication
  2. Post Router
-  - POST /p : post
-  - POST /p/:postId/comment : comment
+  - POST /p : post o
+  - POST /p/:postId/comment : comment o
   - POST /p/:postId/like : like 
-  - GET /p : render upload page 
-  - GET /p/:postId : get post
+  - GET /p : render upload page o
+  - GET /p/:postId : get post o
   - DELETE /p/:postId : delete post
 
  3. Profile Router
@@ -66,3 +66,13 @@
  2. GET
   - /api/v1/follow/:userId 
  
+
+ ## TODO
+ - LIKE 부분 수정 !
+ - posts 넘길 시 필요없는 부분(user 전체)넘김
+ - 포스트 삭제
+ - 팔로우 기능
+ - 스토리 o
+ - 프로필 ing
+ - 업로드 modal 형식으로 수정 o 
+ - 이미지 업로드 aws로

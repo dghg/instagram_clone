@@ -11,7 +11,6 @@ const localStrategy = (passport: PassportStatic) => { // authenticate strategy
   passport.use(new Strategy({usernameField: 'id'}, async (id, password, done) => {
     try {
       const existed = await User.findOne({where: {id}});
-      console.log(existed);
       if(existed){
         const compare_pw = await bcrypt.compare(password, existed.password);
         if(compare_pw){
