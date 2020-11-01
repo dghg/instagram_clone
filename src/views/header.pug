@@ -10,14 +10,12 @@ head
   link(rel='stylesheet', href='https://ka-f.fontawesome.com/releases/v5.15.1/css/free-v4-shims.min.css')
   link(rel='stylesheet', href='https://ka-f.fontawesome.com/releases/v5.15.1/css/free-v4-font-face.min.css')
   link(rel='stylesheet' href='https://ka-f.fontawesome.com/releases/v5.15.1/css/free.min.css')
-  link(rel='stylesheet', href='http://localhost:3000/css/page.css')
-  script(src='http://localhost:3000/js/upload.js')
-  link(rel='stylesheet', htef='http://localhost:3000/css/free.min.cs')
+  link(rel='stylesheet', href=`http://${baseurl}/css/page.css`)
 .container
   .row.header
     .col-sm
       a(href='/')
-        img(src='http://localhost:3000/img/instagram.png' style='width: 50%')
+        img(src=`http://${baseurl}/img/instagram.png` style='width: 50%')
     .col-sm
       form.search-form(action='/search' method='get')
         input(type='text' placeholder='검색')
@@ -31,7 +29,7 @@ head
       i.far.fa-sticky-note
       i.fab.fa-wpexplorer
       i.far.fa-user-circle
-    .modal#myModal
+    .modal#uploadModal
       .modal-content
           input#contents(type='text' placeholder='문구 입력...')
           span.postbutton= '공유하기'

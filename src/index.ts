@@ -13,6 +13,8 @@ import postRouter from './routes/post';
 import profileRouter from './routes/profile';
 import storyRouter from './routes/story';
 import followRouter from './routes/follow';
+import cors from 'cors';
+import { TableHints } from 'sequelize/types';
 
 class App {
     app: express.Application;
@@ -39,6 +41,8 @@ class App {
         },
       }));
       this.app.use(flash());
+    //  this.app.use(cors({origin: '*'}));
+      this.app.locals.baseurl = process.env.BASEURL;
     }
 
     private render(): void {
