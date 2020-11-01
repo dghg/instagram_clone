@@ -8,12 +8,8 @@ const router = Router();
 router.post('/', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
   try {
     const {followingId} = req.body;
-    const followings = await req.user.getFollowings();
-    const existed = followings.find((e)=>{
-        if(e.id===followingId){
-            return true;
-        }
-    })
+    const existed = await req.user.hasFollowings(followingId);
+
     if(existed){
         res.status(403).json({}); // already existed
     }
@@ -33,10 +29,13 @@ router.post('/', isLoggedIn, async (req: Request, res: Response, next: NextFunct
 router.delete('/', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
     try {
       const {followingId} = req.body;
-      const existed = await req.user.getFollowings({where: {followingId}});
+      const existed = await req.user.hasFollowings(followingId);
       if(existed){
-          existed[0].destroy();
-
+        req.user.removeFollowings(followingId);
+        res.status(200).send();
+      }
+      else {
+        res.status(403).json({});
       }
     } catch(err){
         logger.error(err);

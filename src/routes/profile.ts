@@ -8,6 +8,8 @@ router.get('/:id', isLoggedIn, async (req: Request, res: Response, next: NextFun
     try {
       const user = await User.findOne({where : {id: req.params.id}});
       if(user){
+          const isFollowing = await req.user.hasFollowings(req.params.id);
+          // check req.user follows profile user
           const followings = await user.countFollowings();
           const followers = await user.countFollowers();
           const posts = await user.getPosts();
@@ -16,6 +18,7 @@ router.get('/:id', isLoggedIn, async (req: Request, res: Response, next: NextFun
               followings,
               followers,
               profile: user,
+              isFollowing,
           })
       };
     } catch(err){

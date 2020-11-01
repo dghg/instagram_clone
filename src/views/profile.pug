@@ -6,7 +6,10 @@ block content
         h2#profile_id= profile.id
       span
         if profile.id !== user.id
-          button.followbutton
+          if !isFollowing
+            button.followbutton
+          else
+            button.defollowbutton
     ul.user_info
       li
         span= '게시물 '
