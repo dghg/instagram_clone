@@ -16,6 +16,8 @@ import {
     BelongsToManyCreateAssociationMixin,
     BelongsToManyCountAssociationsMixin,
     BelongsToManyAddAssociationMixin,  
+    BelongsToManyRemoveAssociationMixin,
+    BelongsToManyHasAssociationMixin,
   } from "sequelize";
 import { SequelizeAttributes } from "../typings/SequelizeAttributes";
 
@@ -66,7 +68,9 @@ export class User extends Model implements UserAttributes {
     public getFollowings!: BelongsToManyGetAssociationsMixin<User>;
     public createFollowings!: BelongsToManyCreateAssociationMixin<User>;
     public countFollowings!: BelongsToManyCountAssociationsMixin;
-
+    public hasFollowings!: BelongsToManyHasAssociationMixin<User, string>;
+    public removeFollowings!: BelongsToManyHasAssociationMixin<User, string>;
+    
     public addFollowers!: BelongsToManyAddAssociationMixin<User, string>;
     public getFollowers!: BelongsToManyGetAssociationsMixin<User>;
     public createFollowers!: BelongsToManyCreateAssociationMixin<User>;
