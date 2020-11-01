@@ -45,16 +45,14 @@ router.post('/', isLoggedIn, async (req: Request, res: Response, next: NextFunct
   }
 );
 
-router.get('/', isLoggedIn, (req: Request, res: Response, next: NextFunction) => {
-  res.render('upload');
-}); // upload \page 
-
 router.get('/:id', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
   try {
     const existed = await Post.findOne({where : {id: req.params.id}, include: {model: Comment, as: 'comments'}});
     if(existed){
+      const isFollowing = await req.user.hasFollowings(existed.userId);
       res.render('post', {
         post: JSON.parse(JSON.stringify(existed)),
+        isFollowing,
       });
     }
 
@@ -131,6 +129,7 @@ router.delete('/comment', isLoggedIn, async (req: Request, res: Response, next: 
 });
 
 router.post('/img', isLoggedIn, upload.single('img'), (req: Request, res: Response, next: NextFunction) => {
+  console.log('img upload success');
   res.json({url: req.file.filename});
 });
 
