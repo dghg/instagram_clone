@@ -1,5 +1,5 @@
 // modal function
-var modal = document.getElementById('myModal');
+var modal = document.getElementById('commentModal');
 document.querySelectorAll('.commentBtn').forEach((btn) => {
   btn.onclick = function() { // pass comment id to delete modal 
       document.getElementsByClassName('delete')[0].children[0].innerHTML = btn.parentElement.children[0].innerHTML;

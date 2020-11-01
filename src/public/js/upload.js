@@ -22,7 +22,7 @@ function imgupload(files, isStory=false) {
             storyxhr.send(JSON.stringify(_));
             }
           else {
-              var modal = document.getElementById('myModal');
+              var modal = document.getElementById('uploadModal');
               modal.style.display= "block";
               
               document.img = JSON.parse(xhr.responseText).url;
@@ -33,8 +33,9 @@ function imgupload(files, isStory=false) {
     xhr.send(data);
 }
 
-window.onload = function() {
-    var modal = document.getElementById('myModal');
+window.addEventListener('load', function() {
+    console.log('window onload');
+    var modal = document.getElementById('uploadModal');
     var span = document.getElementsByClassName('postbutton')[0];
     span.onclick = function() {
         var xhr = new XMLHttpRequest();
@@ -72,4 +73,4 @@ window.onload = function() {
     }
     })
     
-}
+});
