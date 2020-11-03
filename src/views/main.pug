@@ -4,7 +4,7 @@ block content
   .row.main      
     .stories
       .filebox.circle
-        label(for='story_file')
+        label(for='story_file' style='padding-top:30%;')
           i.fas.fa-plus
         input.storyupload(type='file' id='story_file' accept='image/*')
       ul(style='')
@@ -17,10 +17,14 @@ block content
       each post in posts
         .p
           .userid
+            div(style='display:none;')= post.id
             a(href=`/profile/${post.userId}`)= post.userId
+            if post.userId === user.id
+              button.postBtn.fas.fa-ellipsis-h
           img(src=post.img)
           .icon
-            i.far.fa-heart(onclick=`clickLike(${JSON.stringify(post)})`)
+            div(style="display:none;")= post.id
+            i.far.fa-heart
             a(href=`/p/${post.id}`)
               i.far.fa-comments
           .likes
@@ -36,7 +40,13 @@ block content
               div(style='display:none;')= `${post.id}`
               input(type='text' placeholder='댓글 달기...' name='comment' onchange='comment_onchange(this);')
               button#commentpost(type='submit' disabled)= '게시'
-    .right          
+    .right
+    .modal#deleteModal
+      .modal-content
+        span.delete= '삭제'
+        span.close= '닫기'
     footer
     script(src=`http://${baseurl}/js/main.js`)
     script(src=`http://${baseurl}/js/upload.js`)
+    script(src=`http://${baseurl}/js/post.js`)
+    script(src=`http://${baseurl}/js/like.js`)

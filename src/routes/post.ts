@@ -33,6 +33,7 @@ const upload = multer({
 router.post('/', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
   const {content, img} = req.body;
   try {
+    
     const newPost = await req.user.createPost({
       content,
       img,
@@ -54,6 +55,9 @@ router.get('/:id', isLoggedIn, async (req: Request, res: Response, next: NextFun
         post: JSON.parse(JSON.stringify(existed)),
         isFollowing,
       });
+    }
+    else{
+      next(new Error('Not FOUND'));
     }
 
   } catch(err){
@@ -82,43 +86,36 @@ router.post('/comment', isLoggedIn, async (req: Request, res: Response, next: Ne
   }
 });
 
-router.post('/:id/like', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
-  const id = parseInt(req.params.id);
-  try {
-
-    req.user.addLikes(id)
-    .then(()=>(
-      res.status(200).redirect('/p/'+id)
-    ));
-    
-
-
-  } catch(err){
-    console.log(err);
-    // logger.error(err);
-    next(err);
-  }
-});
-
-router.delete('/:id/like',  isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
-  const id = req.params.id;
-  try {
-  } catch(err){
-    logger.error(err);
-    next(err);
-  }
-});
-
+ // delete comment
 router.delete('/comment', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
   try {
     const {id} = req.body;
     const deleted = await Comment.findOne({where: {id}}); 
-    if(deleted){
+    if(deleted && deleted.userId === req.user.id){
       deleted.destroy()
       .then(()=>{
         res.status(200).json({});
       });
     } 
+    else {
+      res.status(403).json({});
+    }
+  } catch(err) {
+    logger.error(err);
+    next(err);
+  }
+});
+
+router.delete('/', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const {id} = req.body;
+    const deleted = await Post.findOne({where: {id}});
+    if(deleted && deleted.userId === req.user.id) {
+      deleted.destroy()
+      .then(()=>{
+        res.status(200).json({});
+      });
+    }
     else {
       res.status(403).json({});
     }

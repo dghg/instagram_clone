@@ -7,6 +7,7 @@ block content
         img#post_img(src=`http://${baseurl}/${post.img}`)
       .col-sm
         .userid
+          div(style='display:none;')= `${post.id}`
           a#profile_id(href=`/profile/${post.userId}`)= post.userId
           span= "    " 
           if post.userId !== user.id
@@ -14,6 +15,8 @@ block content
               button.followbutton
             else
               button.defollowbutton
+          else
+            button.postBtn.fas.fa-ellipsis-h
         .post_content
           span.userid(style="border:none;")= post.userId
           span.content= post.content
@@ -26,14 +29,14 @@ block content
               span= comment.content
               if user.id===comment.userId
                 button.commentBtn.fas.fa-ellipsis-h
-        .modal#commentModal
+        .modal#deleteModal
           .modal-content
             span.delete= '삭제'
-              div(style="display:none;")
             span.close= '닫기'
             
         .icon
-          i.far.fa-heart(onclick=``)
+          div(style="display:none;")= post.id
+          i.far.fa-heart
           a(href=`/p/${post.id}`)
             i.far.fa-comments
         .comment
@@ -45,3 +48,5 @@ block content
   script(src=`http://${baseurl}/js/post.js`)
   script(src=`http://${baseurl}/js/follow.js`)
   script(src=`http://${baseurl}/js/upload.js`)
+  script(src=`http://${baseurl}/js/like.js`)
+

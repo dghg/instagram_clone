@@ -1,10 +1,9 @@
 extends header.pug
 block content
-  .user
+  .user(style='margin-bottom:1%; padding-bottom:10%;border-bottom: 1px solid #d4d4d4;')
     .userid(style="border: none; font-size: 25px;")
       span
-        h2#profile_id= profile.id
-      span
+        h2(style="display:inline;padding-right:20px;")#profile_id= profile.id
         if profile.id !== user.id
           if !isFollowing
             button.followbutton
@@ -20,8 +19,17 @@ block content
       li
         span= '팔로잉 '
         span(style='font-weight:bold;')= followings
-     
+  .links
+    a= '게시물'
+  .posts
+    - var r = 0
+    each post, idx in posts
+      if idx%3 === 0
+        .row
+      a(href=`http://${baseurl}/p/${post.id}`)
+        img.postimg(src=`http://${baseurl}/${post.img}` style="width:33%;height:33%;padding:28px;")
   .menu
   .posts
   script(src=`http://${baseurl}/js/follow.js`)
   script(src=`http://${baseurl}/js/upload.js`)
+  script(src=`http://${baseurl}/js/profile.js`)

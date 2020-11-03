@@ -45,7 +45,7 @@ window.addEventListener('load', function() {
         };
         xhr.onload = function() {
             if(xhr.status===200){
-              location.href = 'http://localhost:3000/p/'+ JSON.parse(xhr.responseText).id;
+              location.href = 'http://localhost:3001/p/'+ JSON.parse(xhr.responseText).id;
               // redirect to post if post created
             }
         }

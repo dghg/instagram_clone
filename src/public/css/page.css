@@ -151,7 +151,7 @@ table {
   .comment, .content, .likes {
 	  padding: 5px;
   }
-  .comment button {
+  .comment button, .postBtn {
 	  color: #bfe3f1;
 	  appearance: none;
 	  background: none;
@@ -175,7 +175,9 @@ table {
   .post_content {
 	  padding-top: 20px;
   }
-
+  .user_info {
+	  padding-top: 6%;
+  }
   .user_info li{
 	display: inline;
     padding-right: 20px;
@@ -185,7 +187,7 @@ table {
 	  width: 86px;
   }
 
-  .userid  button {
+  .userid .followButton, .defollowButton {
 	  font-size: 14px;
 	  border-radius: 3px;
 	  border: none;
@@ -193,6 +195,7 @@ table {
 	  color: white;
 	  line-height: 26px;
 	  width: 86px;
+	  display: inline;
   }
 
 /* The Modal (background) */
@@ -233,4 +236,5 @@ table {
             color: black;
             text-decoration: none;
             cursor: pointer;
-        }
+		}
+		
