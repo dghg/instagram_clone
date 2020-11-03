@@ -54,7 +54,7 @@ export class Post extends Model implements PostAttributes {
 
     public static associations: {
         comments: Association<Post, Comment>;
-        likes: Association<Post, Like>;
+        likes: Association<Post, User>;
     };
 
     static initialize(sequelize : Sequelize) {

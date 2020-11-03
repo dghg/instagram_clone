@@ -89,7 +89,7 @@ export class User extends Model implements UserAttributes {
         stories: Association<User, Story>;
         followings: Association<User, User>;
         followers: Association<User, User>;
-        likes: Association<User, Like>;
+        likes: Association<User, Post>;
     };
 
     static initialize(sequelize: Sequelize) {

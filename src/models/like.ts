@@ -65,7 +65,7 @@ import {
             });
       }
       static associate() {
-          this.belongsTo(Post);
-          this.belongsTo(User);
+          this.belongsTo(Post, {foreignKey: 'PostId'});
+          this.belongsTo(User, {foreignKey: 'UserId'});
       }
   }
