@@ -1,34 +1,24 @@
 # instagram clone coding
+ - Server side : Node, Express, Typescript
+ - Client side : (vanila)JS
+ - Database : Mysql & Sequelize ORM
+ - View template : pug
+ - Authentication : passport (local, facebook)
 
+## Features
+ 1. Authroize
+  - create new account (using oauth with facebook)
+  - login
+ 2. Post
+  - upload image with text
+  - upload story
+  - Comment, like on post
+ 3. Follow
+  - follow & defollow other user
+  - showing my followings' posts, stories
+ 4. profile
+  - explore others' profile
 
-## 1. Models
-1) User : User 정보 저장 (id(PK), password, user_name, email, social)
- - Association
- > Post와 1:N 관계 구성
- > getPosts() countPosts() createPost()
- > Comment와 1:N 관계 구성
- > getComments() countComments() createComment()
- > Like와 1:N 관계 구성
- > Story와 1:N 관계 구성
-
-2) Post : Post 정보 저장 (id(PK), content, img, UserId)
- - Association
- > User와 N:1
- > Comment와 1:N
- > getComments() countComments() createComment()
- > Like와 1:N
- > getLikes() countLikes() createLike()
- 
-3) Comment : Comment 정보 저장( id(PK), content, UserId, PostId)
- > User와 N:1
- > Post와 N:1
-
-4) Like : Like 정보 저장 ( id(PK), PostId, UserId)
- > Post와 N:1
- > User와 N:1
-
-5) Story : Story 정보 저장 (id(PK), UserId)
- > User와 N:1
 
 ## 2. Routers
  - GET / : 메인 페이지 & 로그인 >> isNotLoggedIn 시 login rendering. 로그인 시 main rendering
@@ -52,27 +42,8 @@
   - POST /story : story
   - GET /story/:id : story 
 
-## 3. View
- - login.pug : login page
- - main.pug : main page
- - story.pug : story page
- - post.pug : post page
- - profile.pug : profile page
-
-## API
- 1. POST
-  - /api/v1/following
-  {follower: 'follower_id', following: 'following_id'};
- 2. GET
-  - /api/v1/follow/:userId 
- 
-
  ## TODO
- - LIKE 부분 수정 !
- - posts 넘길 시 필요없는 부분(user 전체)넘김
- - 포스트 삭제
- - 팔로우 기능
- - 스토리 o
- - 프로필 ing
- - 업로드 modal 형식으로 수정 o 
- - 이미지 업로드 aws로
+ - posts 넘길 시 필요한부분만 
+ - 스토리 view 수정
+ - 프로필 화면
+ - 이미지 업로드
