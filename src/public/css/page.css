@@ -72,6 +72,9 @@ table {
 .stories > ul{
 	display: inline;
 }
+.stories li {
+	display: inline;
+}
 
 
 .posts {
@@ -107,6 +110,8 @@ table {
 	  text-align: center;
 	  line-height: 50px;
 	  vertical-align: middle;
+	  display: inline-block;
+	  margin-right: 5px;
   }
 
   .title {

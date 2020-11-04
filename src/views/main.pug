@@ -3,16 +3,17 @@ extends header.pug
 block content
   .row.main      
     .stories
-      .filebox.circle
-        label(for='story_file' style='padding-top:30%;')
-          i.fas.fa-plus
-        input.storyupload(type='file' id='story_file' accept='image/*')
-      ul(style='')
+      ul
+        li
+          .filebox.circle
+            label(for='story_file' style='padding-top:30%;')
+              i.fas.fa-plus
+            input.storyupload(type='file' id='story_file' accept='image/*')
         each story in stories
           li(style='')
-            .circle(style="padding-bottom:3px;")
+            .circle(style="padding-bottom:3px;border-color:#ff0000;")
               a(href=`/story/${story.id}`)
-            div(style="font-weight:bold;font-size:14px;padding:0;")= story.userId
+                div(style="font-weight:bold;font-size:14px;padding:0;")= story.userId
     .ps
       each post in posts
         .p
