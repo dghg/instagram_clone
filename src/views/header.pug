@@ -25,10 +25,14 @@ head
         label(for='ex_file' style='width:30px;')
           i.fas.fa-upload
         input.postupload(type='file' id='ex_file' accept='image/*')
-      i.fa.fa-home
-      i.far.fa-sticky-note
-      i.fab.fa-wpexplorer
-      i.far.fa-user-circle
+      a(href=`/`)
+        i.fa.fa-home
+      a(href=`/`)
+        i.far.fa-sticky-note
+      a(href=`/explore`)
+        i.fab.fa-wpexplorer
+      a(href=`#`)
+        i.far.fa-user-circle
     .modal#uploadModal
       .modal-content
           input#contents(type='text' placeholder='문구 입력...')

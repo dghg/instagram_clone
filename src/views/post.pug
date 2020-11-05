@@ -4,7 +4,7 @@ block content
   if post
     .row.postpage
       .col-sm
-        img#post_img(src=`http://${baseurl}/${post.img}`)
+        img.post_img(src=`http://${baseurl}/${post.img}`)
       .col-sm
         .userid
           div(style='display:none;')= `${post.id}`
@@ -24,7 +24,7 @@ block content
           for comment in post.comments
             .comment
               div(style='display:none;')= `${comment.id}`
-              span(style="font-weight: bold;")= comment.userId
+              a(style="font-weight: bold;" href=`/profile/${comment.userId}`)= comment.userId
               span= "  "
               span= comment.content
               if user.id===comment.userId

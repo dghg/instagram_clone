@@ -1,19 +1,15 @@
 extends header.pug
     
 block content
-  .row.main      
+  .main      
     .stories
-      ul
-        li
-          .filebox.circle
-            label(for='story_file' style='padding-top:30%;')
-              i.fas.fa-plus
-            input.storyupload(type='file' id='story_file' accept='image/*')
-        each story in stories
-          li(style='')
-            .circle(style="padding-bottom:3px;border-color:#ff0000;")
-              a(href=`/story/${story.id}`)
-                div(style="font-weight:bold;font-size:14px;padding:0;")= story.userId
+      .filebox.circle.story
+        label(for='story_file' style='padding-top:30%;')
+          i.fas.fa-plus
+        input.storyupload(type='file' id='story_file' accept='image/*')
+      each story in stories
+        a(href=`/story/${story.id}` style="border-color:#ff0000;").story.circle
+          div(style="font-weight:bold;font-size:10px;padding:0;")= story.userId
     .ps
       each post in posts
         .p
@@ -22,7 +18,7 @@ block content
             a(href=`/profile/${post.userId}`)= post.userId
             if post.userId === user.id
               button.postBtn.fas.fa-ellipsis-h
-          img(src=post.img)
+          img.post_img(src=post.img)
           .icon
             div(style="display:none;")= post.id
             i.far.fa-heart
@@ -41,7 +37,20 @@ block content
               div(style='display:none;')= `${post.id}`
               input(type='text' placeholder='댓글 달기...' name='comment' onchange='comment_onchange(this);')
               button#commentpost(type='submit' disabled)= '게시'
-    .right
+    .aside
+      .recommend
+        div
+          span(style='color:#8e8e8e;padding-right:35%;')= '회원님을 위한 추천'
+          a(href=`/explore` style='color:#0095f6;font-weight:bold;')= '모두 보기'
+        if recommends
+          each recommend in recommends
+            if recommend.profile
+              img(src=recommend.profile)
+            else
+              img(src=`http://${baseurl}/img/default.jpeg`)
+            span= recommend.id
+            button.followbutton
+
     .modal#deleteModal
       .modal-content
         span.delete= '삭제'
