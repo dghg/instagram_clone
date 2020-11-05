@@ -8,7 +8,7 @@ function imgupload(files, isStory=false) {
             var storyxhr = new XMLHttpRequest();
             storyxhr.onload = function() {
                 if(storyxhr.status===200){
-                    location.href = 'http://localhost:3000/story/' + JSON.parse(storyxhr.responseText).id;
+                    location.href = 'http://localhost:3001/story/' + JSON.parse(storyxhr.responseText).id;
                 }
                 else {
                     alert('failed to upload story');

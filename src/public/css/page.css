@@ -19,6 +19,7 @@ time, mark, audio, video {
 	width: 100%;
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
 	border: 0;
 	font-size: 100%;
 	font: inherit;
@@ -30,6 +31,7 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
@@ -141,6 +143,11 @@ table {
   img {
 	width: 300px;
   }
+
+  .user {
+	  display: flex;
+	  flex-direction: row;
+  }
   
   .userid {
 	  padding-left: 10px;
@@ -243,3 +250,20 @@ table {
             cursor: pointer;
 		}
 		
+.profile_posts {
+	flex-wrap: wrap;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+}
+
+.profile_img {
+	flex-basis: 33.333%;
+	max-width: 290px;
+	position: relative;
+	transition: all .3s;
+}
+
+.postimg {
+	object-fit: cover;	
+	height: 300px;
+}
