@@ -1,0 +1,24 @@
+extends header.pug
+
+block content
+  .edit
+    if user.profile
+      img(src=user.profile).profile
+    else
+      img(src=`http://${baseurl}/img/default.jpeg`).profile
+    h2(style='display: inline;padding-right:20px;padding-bottom:20px; font-size: 25px;')= user.id
+    form.editform
+      .user_name
+        label= '이름'
+          input(type='text' name='user_name' value=`${user.user_name}`)
+      .id
+        label= '사용자 이름'
+          input(type='text' name='id' value=`${user.id}`)
+      .introduce
+        label= '소개'
+          textarea(name='introduce' value=`${user.introduce ? user.introduce : ""}`)
+      .email
+        label= '이메일'
+          input(type='text' name='email' value=`${user.email}`)
+      button(type='submit').followButton= '제출'
+  script(src=`http://${baseurl}/js/edit.js`)
