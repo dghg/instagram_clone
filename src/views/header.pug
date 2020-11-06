@@ -31,8 +31,15 @@ head
         i.far.fa-sticky-note
       a(href=`/explore`)
         i.fab.fa-wpexplorer
-      a(href=`#`)
-        i.far.fa-user-circle
+      i.far.fa-user
+      div.usernav(style='display:none;')
+        if user  
+          a(href=`/profile/${user.id}`).usernavbut
+            span= '프로필'
+        a(href=`/edit`).usernavbut
+          span= '설정'
+        a(href=`/auth/logout`).usernavbut
+          span= '로그아웃'
     .modal#uploadModal
       .modal-content
           input#contents(type='text' placeholder='문구 입력...')

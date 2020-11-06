@@ -39,18 +39,18 @@ block content
               button#commentpost(type='submit' disabled)= '게시'
     .aside
       .recommend
-        div
+        div(style='margin-bottom:10px;')
           span(style='color:#8e8e8e;padding-right:35%;')= '회원님을 위한 추천'
           a(href=`/explore` style='color:#0095f6;font-weight:bold;')= '모두 보기'
         if recommends
           each recommend in recommends
-            if recommend.profile
-              img(src=recommend.profile)
-            else
-              img(src=`http://${baseurl}/img/default.jpeg`)
-            span= recommend.id
-            button.followbutton
-
+            .recom_user
+              if recommend.profile
+                img(src=recommend.profile)
+              else
+                img(src=`http://${baseurl}/img/default.jpeg`)
+              a(href=`/profile/${recommend.id}`)
+                span= recommend.id
     .modal#deleteModal
       .modal-content
         span.delete= '삭제'

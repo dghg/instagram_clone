@@ -71,6 +71,11 @@ window.addEventListener('load', function() {
     e.onchange = function(event) {
         imgupload(event.target.files, true);
     }
-    })
+    });
+
+    document.querySelectorAll('.fa-user')[0].addEventListener('click', function(e) {
+      var usernav = document.querySelectorAll('.usernav')[0];
+      usernav.style.display = usernav.style.display === 'none' ? 'initial' : 'none';
+    });
     
 });

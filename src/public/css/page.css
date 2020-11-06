@@ -23,7 +23,7 @@ time, mark, audio, video {
 	border: 0;
 	font-size: 100%;
 	font: inherit;
-	vertical-align: baseline;
+	vertical-align: middle;
 	-webkit-appearance: none;
 }
 /* HTML5 display-role reset for older browsers */
@@ -31,7 +31,6 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-
 body {
 	line-height: 1;
 }
@@ -105,7 +104,27 @@ table {
 .icon > * {
 	display: inline;
 }
-  
+
+.usernav  {
+	border: 1px solid #adadad;
+	border-radius: 6px;
+	top: 30px;
+	width: fit-content;
+	position: absolute;
+	z-index: 2;
+	text-align: center;
+}
+
+.usernav > div {
+	padding: 5px;
+}
+.usernav a {
+	display: block;
+	padding: 5px;
+}
+.usernavbut:hover {
+	background-color: #d4d4d4;
+}
   .filebox input[type="file"] {  /* 파일 필드 숨기기 */
 	position: absolute;
 	width: 1px;
@@ -162,7 +181,12 @@ table {
 	text-decoration: none;
 	color: inherit;
   }
-
+  a:hover {
+	  text-decoration: none;
+  }
+  a:focus {
+	  color: inherit;
+  }
   .comment, .content, .likes {
 	  padding: 5px;
   }
@@ -190,9 +214,6 @@ table {
   .post_content {
 	  padding-top: 20px;
   }
-  .user_info {
-	  padding-top: 6%;
-  }
   .user_info li{
 	display: inline;
     padding-right: 20px;
@@ -201,7 +222,17 @@ table {
 	  display: inline;
 	  width: 86px;
   }
+.followButton, .defollowButton {
+	font-size: 14px;
+	border-radius: 3px;
+	border: none;
+	background: #0095f6;
+	color: white;
+	line-height: 26px;
+	width: 86px;
+	display: inline;
 
+}
   .userid .followButton, .defollowButton {
 	  font-size: 14px;
 	  border-radius: 3px;
@@ -254,18 +285,51 @@ table {
 		}
 		
 .profile_posts {
+	display :flex;
 	flex-wrap: wrap;
 	-webkit-box-pack: justify;
-	justify-content: space-between;
+	justify-content: start;
 }
 
-.profile_img {
+.img_post {
+	object-fit: cover;	
+	height: 300px;
+}
+
+.img_post:hover {
+	opacity: 0.2;
+}
+
+.recom_user img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.profile {
+	width: 30%;
+	max-width: 200px;
+}
+
+.post {
 	flex-basis: 33.333%;
 	max-width: 290px;
 	position: relative;
 	transition: all .3s;
+	margin: 25px;
 }
 
-.profile_img:hover {
-	opacity: 0.2;
+.edit > img{
+  width: 10%;
+  margin-right: 3%;
+}
+.editform {
+	margin-top: 50px;
+}
+.editform > div {
+	margin: 15px;
+}
+
+.editform label {
+	font-weight: bold;
 }

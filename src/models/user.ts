@@ -33,6 +33,8 @@ export interface UserAttributes { // declare interface for stricter typecheck
     user_name: string;
     email: string;
     social?: string;
+    introduce?: string;
+    profile?: string;
     createdAt?: Date;
     updatedAt?: Date;
 };
@@ -42,8 +44,10 @@ export class User extends Model implements UserAttributes {
     public password: string;
     public user_name: string;
     public email: string;
+    public introduce?: string;
+    public profile?: string;
     public social: string;
- 
+    
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
 
@@ -115,6 +119,14 @@ export class User extends Model implements UserAttributes {
             type: DataTypes.STRING,
             allowNull: false,
             defaultValue: 'local',
+          },
+          introduce: {
+            type: DataTypes.STRING,
+            allowNull: true,
+          },
+          profile: {
+            type: DataTypes.STRING,
+ //         defaultValue: 'default.jpeg'
           },
           createdAt: {
               type: DataTypes.DATE,

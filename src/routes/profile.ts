@@ -12,8 +12,7 @@ router.get('/:id', isLoggedIn, async (req: Request, res: Response, next: NextFun
           // check req.user follows profile user
           const followings = await user.countFollowings();
           const followers = await user.countFollowers();
-          const posts = await user.getPosts();
-          console.log(posts);
+          const posts = await user.getPosts({attributes: ['id', 'content', 'img', 'userId']});
           res.render('profile', {
               posts: JSON.parse(JSON.stringify(posts)),
               followings,
@@ -23,7 +22,7 @@ router.get('/:id', isLoggedIn, async (req: Request, res: Response, next: NextFun
           })
       }
       else{
-          next(new Error('Not Found'));
+          next(new Error(`Not Found User ${req.params.id}`));
       }
     } catch(err){
         logger.error(err);

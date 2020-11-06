@@ -2,7 +2,10 @@ extends header.pug
 block content
   .user(style='margin-bottom:1%; padding-bottom:10%;border-bottom: 1px solid #d4d4d4;')
     .userid(style="border: none; font-size: 25px; flex-basis:33.3333%;")
-      span= '프로필 사진'
+      if profile.profile
+        img.profile(src=`http://${baseurl}/${profile.profile}`)
+      else
+        img.profile(src=`http://${baseurl}/img/default.jpeg`)
     .user_info(style='flex-basis:66.6667%;')
       span.userid
         h2(style='padding-right:20px;padding-bottom:20px; font-size: 25px;')#profile_id= profile.id
@@ -22,13 +25,15 @@ block content
         li
           span= '팔로잉 '
           span(style='font-weight:bold;')= followings
+      .introduce
+        if profile.introduce
+          span= profile.introduce
   .links
     a= '게시물'
-  .posts.profile_posts
+  .profile_posts
     each post in posts
-      a.profile_img(href=`http://${baseurl}/p/${post.id}`)
-        img.postimg(src=`http://${baseurl}/${post.img}` style="margin: 25px;")
-        .overlay
+      div.post(onclick=`location.href="/p/${post.id}"`)
+        img.img_post(src=`http://${baseurl}/${post.img}` style="margin: 25px;")
   script(src=`http://${baseurl}/js/follow.js`)
   script(src=`http://${baseurl}/js/upload.js`)
   script(src=`http://${baseurl}/js/profile.js`)
