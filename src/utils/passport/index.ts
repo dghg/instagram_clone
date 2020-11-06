@@ -12,7 +12,7 @@ const passportConfig = (passport: PassportStatic) =>  {
   
   passport.deserializeUser(async (id: string, done) => {
     try {
-      const user = await User.findOne({where : {id}, include: ['id', 'user_name']});
+      const user = await User.findOne({where : {id}, attributes: {exclude: ['createdAt', 'updatedAt', 'password']}});
       done(null, user); // from session user id , find sequelize user object  and req.user object 
     } catch(err) {
         logger.error(err);
