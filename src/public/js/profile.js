@@ -1,4 +1,11 @@
 window.addEventListener('load', function() {
-  var _ = document.querySelectorAll('.posts')[0];
-  
+  document.querySelectorAll('.post').forEach((el)=>{
+    var hover = el.lastElementChild;
+    el.addEventListener('mouseover', function(event) {
+      hover.style.display = 'flex';
+    });
+    el.addEventListener('mouseout', function(event){
+      hover.style.display = 'none';
+    });
+  });
 });

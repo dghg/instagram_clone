@@ -1,5 +1,6 @@
 window.addEventListener('load', function() {
-  document.querySelectorAll('.editform')[0].addEventListener('submit', function(e) {
+  var editform = document.querySelectorAll('.editform')[0];
+  editform.addEventListener('submit', function(e) {
     e.preventDefault();
     var target = e.target;
     var data = {
@@ -8,6 +9,18 @@ window.addEventListener('load', function() {
         'introduce': target.introduce.value,
         'email': target.email.value,
     }
-    console.log(data);
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      if(xhr.status===200){
+        location.reload();
+      }
+      else {
+        alert('failed to edit profile');
+      }
+    }
+
+    xhr.open('PUT', '/edit');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
   });
 });

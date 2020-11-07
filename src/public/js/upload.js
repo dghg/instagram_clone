@@ -34,7 +34,6 @@ function imgupload(files, isStory=false) {
 }
 
 window.addEventListener('load', function() {
-    console.log('window onload');
     var modal = document.getElementById('uploadModal');
     var span = document.getElementsByClassName('postbutton')[0];
     span.onclick = function() {
