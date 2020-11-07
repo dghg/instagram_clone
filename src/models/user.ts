@@ -63,11 +63,6 @@ export class User extends Model implements UserAttributes {
     public createStory!: HasManyCreateAssociationMixin<Story>;
     public countStories!: HasManyCountAssociationsMixin;
    
-    public getLikes!: BelongsToManyGetAssociationsMixin<Like>;
-    public addLikes!: BelongsToManyAddAssociationMixin<Like, number>;
-    public createLikes!: BelongsToManyCreateAssociationMixin<Like>;
-    public countLikes!: BelongsToManyCountAssociationsMixin;
-
     public addFollowings!: BelongsToManyAddAssociationMixin<User, string>;
     public getFollowings!: BelongsToManyGetAssociationsMixin<User>;
     public createFollowings!: BelongsToManyCreateAssociationMixin<User>;
@@ -93,7 +88,7 @@ export class User extends Model implements UserAttributes {
         stories: Association<User, Story>;
         followings: Association<User, User>;
         followers: Association<User, User>;
-        likes: Association<User, Post>;
+        likes: Association<User, Like>;
     };
 
     static initialize(sequelize: Sequelize) {
@@ -146,6 +141,7 @@ export class User extends Model implements UserAttributes {
         this.hasMany(Post, {as: 'posts', foreignKey: 'userId'});
         this.hasMany(Comment, {as: 'comments', foreignKey: 'userId'});
         this.hasMany(Story, {as: 'stories', foreignKey: 'userId'});
+        this.hasMany(Like, {as: 'likes', foreignKey: 'UserId'});
         this.belongsToMany(Post, {through: Like});
         this.belongsToMany(this, {through: 'follow', as: 'followers', foreignKey: 'followingId'});
         this.belongsToMany(this, {through: 'follow', as: 'followings', foreignKey: 'followedId'});

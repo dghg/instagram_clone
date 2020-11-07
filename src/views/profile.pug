@@ -15,7 +15,7 @@ block content
           else
             button.defollowbutton
 
-      ul
+      ul(style='margin-top:10px;margin-bottom:20px;')
         li
           span= '게시물 '
           span(style='font-weight:bold;')= posts.length
@@ -27,13 +27,18 @@ block content
           span(style='font-weight:bold;')= followings
       .introduce
         if profile.introduce
-          span= profile.introduce
+          span(style='font-weight:bold;')= profile.introduce
   .links
     a= '게시물'
   .profile_posts
     each post in posts
-      div.post(onclick=`location.href="/p/${post.id}"`)
+      a.post(href=`/p/${post.id}`)
         img.img_post(src=`http://${baseurl}/${post.img}` style="margin: 25px;")
+        div.hover(style='display:none;')
+          i.far.fa-heart
+          span= '0'
+          i.far.fa-comments
+          span= '0'
   script(src=`http://${baseurl}/js/follow.js`)
   script(src=`http://${baseurl}/js/upload.js`)
   script(src=`http://${baseurl}/js/profile.js`)

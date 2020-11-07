@@ -21,6 +21,7 @@ import {
   import {Post} from './post';
 
   export interface LikeAttributes {
+      id: number;
       UserId: string;
       PostId: number;
       createdAt?: Date;
@@ -28,28 +29,25 @@ import {
   }
 
   export class Like extends Model implements LikeAttributes {
+      public id: number;
       public UserId: string;
       public PostId: number;
       
       public readonly createdAt!: Date;
       public readonly updatedAt!: Date;
 
-      public readonly users: User[];
-      public readonly posts: Post[];
-      public static associations: {
-          users: Association<Like, User>;
-          posts: Association<Like, Post>;
-      }
-
       static initialize(sequelize: Sequelize){
           this.init({
+              id: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true,
+              },
               UserId: {
                   type: DataTypes.STRING,
-                  primaryKey: true,
               },
               PostId: {
                   type: DataTypes.INTEGER,
-                  primaryKey: true,
               },
               createdAt: {
                 type: DataTypes.DATE,

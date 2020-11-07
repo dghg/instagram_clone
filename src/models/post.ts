@@ -45,7 +45,7 @@ export class Post extends Model implements PostAttributes {
     public countComments!: HasManyCountAssociationsMixin;
         
     public getLikes!: BelongsToManyGetAssociationsMixin<Like>;
-    public addLikes!: BelongsToManyAddAssociationMixin<Like, string>;
+    public addLikes!: BelongsToManyAddAssociationMixin<Like, number>;
     public createLikes!: BelongsToManyCreateAssociationMixin<Like>;
     public countLikes!: BelongsToManyCountAssociationsMixin;
 
@@ -54,7 +54,7 @@ export class Post extends Model implements PostAttributes {
 
     public static associations: {
         comments: Association<Post, Comment>;
-        likes: Association<Post, User>;
+        likes: Association<Post, Like>;
     };
 
     static initialize(sequelize : Sequelize) {
@@ -95,6 +95,7 @@ export class Post extends Model implements PostAttributes {
     this.belongsTo(User, {foreignKey: 'userId'});
     this.belongsToMany(User, {through: Like});
     this.hasMany(Comment, {as: 'comments', foreignKey: 'postId'});
+    this.hasMany(Like, {as: 'likes', foreignKey: 'PostId'});
   }   
 };
 

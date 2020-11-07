@@ -16,9 +16,10 @@ block content
           input(type='text' name='id' value=`${user.id}`)
       .introduce
         label= '소개'
-          textarea(name='introduce' value=`${user.introduce ? user.introduce : ""}`)
+          textarea(name='introduce')= user.introduce ? user.introduce : ""
       .email
         label= '이메일'
           input(type='text' name='email' value=`${user.email}`)
-      button(type='submit').followButton= '제출'
+      button(type='submit' name='smbutton').followButton= '제출'
   script(src=`http://${baseurl}/js/edit.js`)
+  script(src=`http://${baseurl}/js/upload.js`)

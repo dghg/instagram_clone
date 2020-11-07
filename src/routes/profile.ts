@@ -1,8 +1,13 @@
 import {Router, Request, Response, NextFunction } from 'express';
 import logger from '../utils/logger';
 import {User} from '../models/user';
+import {Comment} from '../models/comment';
 import {isLoggedIn} from '../middleware';
+import { Like } from '../models/like';
+import {Post} from '../models/post';
+import {fn, col} from 'sequelize';
 const router = Router();
+
 
 router.get('/:id', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -12,7 +17,28 @@ router.get('/:id', isLoggedIn, async (req: Request, res: Response, next: NextFun
           // check req.user follows profile user
           const followings = await user.countFollowings();
           const followers = await user.countFollowers();
-          const posts = await user.getPosts({attributes: ['id', 'content', 'img', 'userId']});
+          const posts = await Post.findAll({
+              where: {userId: req.params.id},
+              attributes: [
+                  'id', 'content', 'img',
+                  [fn('count', col('likes.PostId')), 'likes_count'],
+                  [fn('count', col('comments.id')), 'comments_count'],
+              ],
+              include: [
+                  {
+                      model: Like,
+                      attributes: [],
+                      as: 'likes',
+                  },
+                  {
+                      model: Comment,
+                      attributes: [],
+                      as: 'comments',
+                  }
+              ],
+              group: ['post.id'],
+          });
+        console.log(posts);
           res.render('profile', {
               posts: JSON.parse(JSON.stringify(posts)),
               followings,

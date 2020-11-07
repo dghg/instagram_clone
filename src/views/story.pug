@@ -2,4 +2,5 @@ link(rel='stylesheet' href=`http://${baseurl}/css/story.css`)
 
 .storyimg
   a(href=`http://${baseurl}/profile/${story.userId}`)= story.userId
-  img(src=`http://${baseurl}/${story.img}`)
+  div(style='background-color:#d4d4d4; width:356px; height:100%;')
+    img(src=`http://${baseurl}/${story.img}`)
