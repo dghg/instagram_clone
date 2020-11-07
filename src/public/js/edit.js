@@ -13,6 +13,7 @@ window.addEventListener('load', function() {
     xhr.onload = function () {
       if(xhr.status===200){
         location.reload();
+        alert('success to edit profile.');
       }
       else {
         alert('failed to edit profile');

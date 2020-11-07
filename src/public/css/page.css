@@ -325,7 +325,10 @@ table {
   margin-right: 3%;
 }
 .editform {
+	padding: 50px;
 	margin-top: 50px;
+	border: 1px solid #d4d4d4;
+	text-align: center;
 }
 .editform > div {
 	margin: 15px;
@@ -335,6 +338,9 @@ table {
 	font-weight: bold;
 }
 
+.editform input, textarea {
+	width: 355px;
+}
 .hover {
 	display: flex;
 	width: 100%;
@@ -349,3 +355,4 @@ table {
 	color: white;
 	font-weight: bold;
 }
+
