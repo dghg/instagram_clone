@@ -9,12 +9,17 @@ const flash = require('connect-flash');
 import router from './routes';
 import cors from 'cors';
 import api from './api/v1';
+
+import redis from 'redis';
+import connect_redis from 'connect-redis';
+
 class App {
     app: express.Application;
 
     constructor() {
         require('dotenv').config();
         this.app = express();
+        this.session();
         this.middleware();
         this.render();
         this.parser();
@@ -22,9 +27,14 @@ class App {
         this.routes();
     }
 
-    private middleware(): void {
-  //  this.app.use(helmet());
-       this.app.use(session({
+    private session(): void {
+      const redisStore = connect_redis(session);
+      const client = redis.createClient({
+        host: process.env.REDIS_HOST as string,
+        port: parseInt(process.env.REDIS_PORT as string),
+        password: process.env.REDIS_PASSWORD as string,
+      });
+      this.app.use(session({
         resave: false,
         saveUninitialized: false,
         secret: process.env.COOKIE_SECRET as string,
@@ -32,7 +42,15 @@ class App {
           httpOnly: true,
           secure: false,
         },
+        store: new redisStore({
+          client,
+          logErrors: true,
+        }),
       }));
+    }
+
+    private middleware(): void {
+  //  this.app.use(helmet());
       this.app.use(flash());
       this.app.use(cors({origin: '*'}));
       this.app.locals.baseurl = process.env.BASEURL;
@@ -48,7 +66,7 @@ class App {
     private parser(): void {
       this.app.use(bodyParser.json()); 
       this.app.use(bodyParser.urlencoded({extended:false}));
-      this.app.use(cookieParser(process.env.COOKIE_SECRET));
+      this.app.use(cookieParser(process.env.COOKIE_SECRET as string));
     }
 
     private passportconfig(): void {
