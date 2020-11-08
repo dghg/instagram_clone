@@ -3,3 +3,4 @@ node_modules/
 logs/
 uploads/
 src/public/css/free.min.cs
+src/config/aws.json

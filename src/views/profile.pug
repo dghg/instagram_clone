@@ -33,7 +33,7 @@ block content
   .profile_posts
     each post in posts
       a.post(href=`/p/${post.id}`)
-        img.img_post(src=`http://${baseurl}/${post.img}` style="margin: 25px;")
+        img.img_post(src=post.img style="margin: 25px;")
         div.hover(style='display:none;')
           i.far.fa-heart
           span= '0'

@@ -4,7 +4,7 @@ block content
   if post
     .row.postpage
       .col-sm
-        img.post_img(src=`http://${baseurl}/${post.img}`)
+        img.post_img(src=post.img)
       .col-sm
         .userid
           div(style='display:none;')= `${post.id}`

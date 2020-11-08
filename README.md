@@ -47,4 +47,3 @@
  - edit 수정
  - 이미지 업로드 부분 aws로
  - search
- - Redis Caching

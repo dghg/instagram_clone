@@ -38,7 +38,7 @@ router.post('/story', isLoggedIn, uploadStory);
 router.get('/story/:id', isLoggedIn, getStory);
 
 // img upload
-router.post('/p/img', isLoggedIn, IMG_UPLOAD, (req: Request, res: Response, next: NextFunction) => {res.status(200).json({url: req.file.filename})});
+router.post('/p/img', isLoggedIn, IMG_UPLOAD, (req: Request, res: Response, next: NextFunction) => {res.status(200).json(req.file)});
 
 // profile
 router.get('/profile/:id', profileUser, profilePosts, (req: Request, res: Response, next: NextFunction)=> {res.render('profile')});
