@@ -17,7 +17,7 @@
   - follow & defollow other user
   - showing my followings' posts, stories
  4. profile
-  - explore others' profile
+  - explore others' profile (/prfile/id)
 
 
 ## 2. Routers
@@ -43,7 +43,8 @@
   - GET /story/:id : story 
 
  ## TODO
- - posts 넘길 시 필요한부분만 
  - 스토리 view 수정
- - 프로필 화면
- - 이미지 업로드
+ - edit 수정
+ - 이미지 업로드 부분 aws로
+ - search
+ - Redis Caching
