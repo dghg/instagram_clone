@@ -43,7 +43,7 @@ window.addEventListener('load', function() {
             "img": document.img,
         };
         xhr.onload = function() {
-            if(xhr.status===200){
+            if(xhr.status===201){
               location.href = 'http://localhost:3001/p/'+ JSON.parse(xhr.responseText).id;
               // redirect to post if post created
             }
