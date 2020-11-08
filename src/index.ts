@@ -6,16 +6,8 @@ import * as path from 'path';
 import passport from 'passport';
 import passportConfig from './utils/passport';
 const flash = require('connect-flash');
-//Router import
-import indexRouter from './routes/index';
-import authRouter from './routes/auth';
-import postRouter from './routes/post';
-import profileRouter from './routes/profile';
-import storyRouter from './routes/story';
-import followRouter from './routes/follow';
-import likeRouter from './routes/like';
+import router from './routes';
 import cors from 'cors';
-import { TableHints } from 'sequelize/types';
 import api from './api/v1';
 class App {
     app: express.Application;
@@ -66,17 +58,9 @@ class App {
     }
 
     private routes(): void {
-      this.app.use('/', indexRouter);
-      this.app.use('/auth', authRouter);
-      this.app.use('/p', postRouter);
-      this.app.use('/profile', profileRouter);
-      this.app.use('/story', storyRouter);
-      this.app.use('/follow', followRouter);
-      this.app.use('/like', likeRouter);
+      this.app.use('/', router);
       this.app.use('/api/v1', api);
     }
-
-
 }
 
 export default new App().app;

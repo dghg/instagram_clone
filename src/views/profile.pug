@@ -9,12 +9,12 @@ block content
     .user_info(style='flex-basis:66.6667%;')
       span.userid
         h2(style='padding-right:20px;padding-bottom:20px; font-size: 25px;')#profile_id= profile.id
-        if profile.id !== user.id
-          if !isFollowing
-            button.followbutton
-          else
-            button.defollowbutton
-
+        if user
+          if profile.id !== user.id
+            if !isFollowing
+              button.followbutton
+            else
+              button.defollowbutton
       ul(style='margin-top:10px;margin-bottom:20px;')
         li
           span= '게시물 '

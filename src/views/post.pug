@@ -10,7 +10,7 @@ block content
           div(style='display:none;')= `${post.id}`
           a#profile_id(href=`/profile/${post.userId}`)= post.userId
           span= "    " 
-          if post.userId !== user.id
+          if user && post.userId !== user.id
             if !isFollowing
               button.followbutton
             else

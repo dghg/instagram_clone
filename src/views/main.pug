@@ -7,9 +7,10 @@ block content
         label(for='story_file' style='padding-top:30%;')
           i.fas.fa-plus
         input.storyupload(type='file' id='story_file' accept='image/*')
-      each story in stories
-        a(href=`/story/${story.id}` style="border-color:#ff0000;").story.circle
-          div(style="font-weight:bold;font-size:10px;padding:0;")= story.userId
+      if stories
+        each story in stories
+          a(href=`/story/${story.id}` style="border-color:#ff0000;").story.circle
+            div(style="font-weight:bold;font-size:10px;padding:0;")= story.userId
     .ps
       each post in posts
         .p
