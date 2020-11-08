@@ -19,14 +19,17 @@ window.addEventListener('load', function () {
     icon.addEventListener('click', function () {
         var xhr_ = new XMLHttpRequest();
         xhr_.onload = function () {
+            var likecount = icon.parentElement.parentElement.querySelector('.likecount');
             if(xhr_.status===200){
               if(method==='POST'){
                   method = 'DELETE';
                   icon.style.color = '#ff0000';
+                  likecount.innerHTML++;
               }
               else {
                   method = 'POST';
                   icon.style.color = '#000000';
+                  likecount.innerHTML--;
               }
             }
             else {
