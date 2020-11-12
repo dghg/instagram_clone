@@ -1,10 +1,12 @@
-import {Request, Response, NextFunction} from 'express';
+import {Request, Response, NextFunction, query} from 'express';
 import {Comment} from '../models/comment';
 import { Post } from '../models/post';
 import logger from '../utils/logger';
 import {Op}  from 'sequelize';
 import {fn, col} from 'sequelize';
 import { Like } from '../models/like';
+import {db} from '../models';
+import { debug } from 'console';
 
 export const uploadPost = async (req: Request, res: Response, next: NextFunction) => {
   const { content, img } = req.body;
@@ -100,6 +102,7 @@ export const getPosts = async (req: Request, res: Response, next: NextFunction) 
 
 export const profilePosts = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    /*
     const posts = await Post.findAll({
       where: {userId: req.params.id},
       attributes: [
@@ -121,6 +124,9 @@ export const profilePosts = async (req: Request, res: Response, next: NextFuncti
       ],
       group: ['post.id'],
     });
+    */
+    const [posts, meta]= await db.query("SELECT `Post`.`id`, `Post`.`content`, `Post`.`img`, count(distinct `likes`.`id`) AS `likes_count`, count(distinct `comments`.`id`) AS `comments_count` FROM `posts` AS `Post` LEFT OUTER JOIN `likes` AS `likes` ON `Post`.`id` = `likes`.`PostId` LEFT OUTER JOIN `comments` AS `comments` ON `Post`.`id` = `comments`.`postId` WHERE `Post`.`userId` = 'test1234' GROUP BY `post`.`id`;");
+    console.log(posts);
     res.locals.posts = posts;
     next();
   } catch(err){
