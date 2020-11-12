@@ -9,15 +9,17 @@
  1. Authroize
   - create new account (using oauth with facebook)
   - login using passport & session
+  ![CreateAccount](https://ehdguds3.s3.ap-northeast-2.amazonaws.com/CreateAccount.gif)
  2. Post
   - upload image(multer + aws s3) with text
   - Comment, like on post
+  ![UploadPost](https://ehdguds3.s3.ap-northeast-2.amazonaws.com/UploadPost.gif)
  3. Follow
   - follow & defollow other user
   - showing user followings' posts, stories
  4. profile
   - explore others' profile (/profile/id)
-
+  ![Comment](https://ehdguds3.s3.ap-northeast-2.amazonaws.com/Comment.gif)
 
 ## 2. Routers
  - GET / : 메인 페이지 & 로그인 >> isNotLoggedIn 시 login rendering. 로그인 시 main rendering

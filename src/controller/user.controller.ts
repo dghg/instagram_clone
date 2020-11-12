@@ -143,6 +143,9 @@ export const profileUser = async (req: Request, res: Response, next: NextFunctio
       res.locals.followings = followings;
       res.locals.followers = followers;
       res.locals.profile = JSON.parse(JSON.stringify(user));
+      if(req.user) {
+        res.locals.user = JSON.parse(JSON.stringify(req.user));
+      }
       next();
     }
     else {

@@ -32,13 +32,13 @@ block content
     a= '게시물'
   .profile_posts
     each post in posts
-      a.post(href=`/p/${post.id}`)
+      a.post(href=`/p/${post.id}` style='position:relative;')
         img.img_post(src=post.img style="margin: 25px;")
-        div.hover(style='display:none;')
+        div.hover(style='display:none;padding-left:25%;')
           i.far.fa-heart
-          span= '0'
+          span= post.likes_count
           i.far.fa-comments
-          span= '0'
+          span= post.comments_count
   script(src=`http://${baseurl}/js/follow.js`)
   script(src=`http://${baseurl}/js/upload.js`)
   script(src=`http://${baseurl}/js/profile.js`)

@@ -125,7 +125,7 @@ export const profilePosts = async (req: Request, res: Response, next: NextFuncti
       group: ['post.id'],
     });
     */
-    const [posts, meta]= await db.query("SELECT `Post`.`id`, `Post`.`content`, `Post`.`img`, count(distinct `likes`.`id`) AS `likes_count`, count(distinct `comments`.`id`) AS `comments_count` FROM `posts` AS `Post` LEFT OUTER JOIN `likes` AS `likes` ON `Post`.`id` = `likes`.`PostId` LEFT OUTER JOIN `comments` AS `comments` ON `Post`.`id` = `comments`.`postId` WHERE `Post`.`userId` = 'test1234' GROUP BY `post`.`id`;");
+    const [posts, meta]= await db.query("SELECT `Post`.`id`, `Post`.`img`, count(distinct `likes`.`id`) AS `likes_count`, count(distinct `comments`.`id`) AS `comments_count` FROM `posts` AS `Post` LEFT OUTER JOIN `likes` AS `likes` ON `Post`.`id` = `likes`.`PostId` LEFT OUTER JOIN `comments` AS `comments` ON `Post`.`id` = `comments`.`postId` WHERE `Post`.`userId` = '" +req.params.id +"' GROUP BY `post`.`id`;");
     console.log(posts);
     res.locals.posts = posts;
     next();
