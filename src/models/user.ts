@@ -28,6 +28,7 @@ import { Like } from "./like";
 
 
 export interface UserAttributes { // declare interface for stricter typecheck 
+    pk: number;
     id: string; // not optional
     password: string;
     user_name: string;
@@ -40,6 +41,7 @@ export interface UserAttributes { // declare interface for stricter typecheck
 };
 
 export class User extends Model implements UserAttributes {
+    public pk: number;
     public id: string;
     public password: string;
     public user_name: string;
@@ -93,9 +95,13 @@ export class User extends Model implements UserAttributes {
 
     static initialize(sequelize: Sequelize) {
       this.init({
+          pk: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+          },
           id: {
             type: DataTypes.STRING,
-            primaryKey: true,
           },
           password: {
             type: DataTypes.STRING,
