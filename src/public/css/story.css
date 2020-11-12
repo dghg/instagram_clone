@@ -4,6 +4,7 @@ body {
 	color: white;
 }
 .storyimg {
+  background-color: #262626;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -14,15 +15,9 @@ a {
     text-decoration: none;
     color: white;
 }
-.progressBar {
-	height: 1% !important;
-	background-color: #ff0000 !important;
-	width: 30% !important;
-}
 
 .storyimg div {
 	background-size: cover;	
 	width: 400px;
 	height: 100%;
-	background-color: #d4d4d4;
 }

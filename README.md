@@ -1,23 +1,22 @@
 # instagram clone coding
  - Server side : Node, Express, Typescript
  - Client side : (vanila)JS
- - Database : Mysql & Sequelize ORM
+ - Database : Mysql + Sequelize ORM, Redis for session
  - View template : pug
  - Authentication : passport (local, facebook)
 
 ## Features
  1. Authroize
   - create new account (using oauth with facebook)
-  - login
+  - login using passport & session
  2. Post
-  - upload image with text
-  - upload story
+  - upload image(multer + aws s3) with text
   - Comment, like on post
  3. Follow
   - follow & defollow other user
-  - showing my followings' posts, stories
+  - showing user followings' posts, stories
  4. profile
-  - explore others' profile (/prfile/id)
+  - explore others' profile (/profile/id)
 
 
 ## 2. Routers
@@ -45,5 +44,4 @@
  ## TODO
  - 스토리 view 수정
  - edit 수정
- - 이미지 업로드 부분 aws로
  - search

@@ -196,7 +196,10 @@ table {
 	  background: none;
 	  border: none;
   }
-  
+
+  .postbutton {
+    margin-top:20px;
+  }
   .comment form {
 	  border-top: 1px solid #d4d4d4;
   }
@@ -336,6 +339,7 @@ table {
 
 .editform label {
 	font-weight: bold;
+	
 }
 
 .editform input, textarea {

@@ -9,21 +9,17 @@ block content
     h2(style='display: inline;padding-right:20px;padding-bottom:20px; font-size: 25px;')= user.id
     form.editform
       .user_name
-        label
-          span= '이름'
-          input(type='text' name='user_name' value=`${user.user_name}`)
+        label(for='user_name')= '이름'
+        input(type='text' name='user_name' value=`${user.user_name}`)
       .id
-        label
-          span= '사용자 이름'
-          input(type='text' name='id' value=`${user.id}`)
+        label(for='id')= '사용자 이름'
+        input(type='text' name='id' value=`${user.id}`)
       .introduce
-        label
-          span= '소개'
-          textarea(name='introduce')= user.introduce ? user.introduce : ""
+        label(for='introduce')= '소개'
+        textarea(name='introduce')= user.introduce ? user.introduce : ""
       .email
-        label
-          span= '이메일'
-          input(type='text' name='email' value=`${user.email}`)
+        label(for='email')= '이메일'
+        input(type='text' name='email' value=`${user.email}`)
       button(type='submit' name='smbutton').followButton= '제출'
   script(src=`http://${baseurl}/js/edit.js`)
   script(src=`http://${baseurl}/js/upload.js`)

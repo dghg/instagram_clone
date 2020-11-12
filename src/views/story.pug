@@ -1,7 +1,9 @@
 link(rel='stylesheet' href=`http://${baseurl}/css/story.css`)
+link#bootstrap-css(href='http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet')
 
 .storyimg
   a(href=`http://${baseurl}/profile/${story.userId}`)= story.userId
-  div.progressBar
+  .progress(style='height:5px;background-color:#262626;')
+    .progress-bar(role='progressbar' style='width:0%; background-color:white;')
   div(style=`background-image: url("${story.img}"`)
   script(src=`http://${baseurl}/js/story.js`)
