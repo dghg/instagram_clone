@@ -19,7 +19,7 @@
   - showing user followings' posts, stories
  4. profile
   - explore others' profile (/profile/id)
-  ![Comment](https://ehdguds3.s3.ap-northeast-2.amazonaws.com/Comment.gif)
+  ![Comment](https://user-images.githubusercontent.com/44010625/99015476-726dfe80-2598-11eb-82c5-d873ec3c3c6a.gif)
 
 ## 2. Routers
  - GET / : 메인 페이지 & 로그인 >> isNotLoggedIn 시 login rendering. 로그인 시 main rendering
