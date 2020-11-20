@@ -9,11 +9,11 @@
  1. Authroize
   - create new account (using oauth with facebook)
   - login using passport & session
-  ![CreateAccount](https://ehdguds3.s3.ap-northeast-2.amazonaws.com/CreateAccount.gif)
+  ![CreateAccount](https://user-images.githubusercontent.com/44010625/99761082-8f767480-2b38-11eb-9855-86bf258407a6.gif)
  2. Post
   - upload image(multer + aws s3) with text
   - Comment, like on post
-  ![UploadPost](https://ehdguds3.s3.ap-northeast-2.amazonaws.com/UploadPost.gif)
+  ![UploadPost](https://user-images.githubusercontent.com/44010625/99761086-91403800-2b38-11eb-801e-a760f1010bd3.gif)
  3. Follow
   - follow & defollow other user
   - showing user followings' posts, stories
